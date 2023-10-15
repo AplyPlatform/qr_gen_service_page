@@ -145,6 +145,13 @@
 												<button type="button" class="btn btn-info btn-block" id="applyQRButton">만들기</button>
 											</div>
 										</div>
+										<div id="collapseQR" class="panel-collapse collapse">
+											<div class="row" id="qr_code_image_area">
+												<center>
+													<span style="width:640px;height:640px;" id="qr_big_image_1"></span>
+												</center>
+											</div>
+										</div>
 										<div id="resultArea" style="display:none;">
 											<div class="row">
 												<div class="col-sm-12 align-items-center justify-content-center">
@@ -187,7 +194,7 @@
 												</div>
 											</div>
 											<div class="row" style="margin-top:10px;">												
-												<div class="col-sm-12">
+												<div class="col-sm-6">
 													<div class="dropdown">
 														<button class="btn btn-warning dropdown-toggle btn-block float-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 															<i class="fa fa-download"></i> 다운로드</span>
@@ -200,6 +207,11 @@
 															</ul>
 														</div>
 													</div>
+												</div>
+												<div class="col-sm-6">
+													<button class="btn btn-success btn-block float-right" type="button" id="printButton">
+														<i class="fa fa-print"></i> 출력하기
+													</button>
 												</div>
 											</div>
 										</div>
