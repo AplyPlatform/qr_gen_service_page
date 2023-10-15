@@ -102,13 +102,13 @@
 			</div>
 		</nav>
 
-		<header id="gtco-header2" class="gtco-cover" role="banner">
-			<div class="gtco-container">
-					<div class="row">
-						<div class="col-md-12 text-center" style="background: rgb(120,120,120,0.3);padding:10px;margin:10px">
-							<span style="font-size:22px;color:#fff;"><b>QR코드 만들기</b></span>
-						</div>
+		<header id="gtco-header2" role="banner">
+			<div class="gtco-container" style="max-width:100%; background: rgba(0, 0, 0, 0.2); padding:5em 0;">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<h2 style="padding-top:0; margin:0; color:#FFF;"><b>QR코드 만들기</b></h2>
 					</div>
+				</div>
 			</div>
 		</header>
 
@@ -141,9 +141,11 @@
 											</div>											
 										</div>
 										<div class="row">
-											<div class="col-sm-12">
-												<button type="button" class="btn btn-info btn-block" id="applyQRButton">만들기</button>
+											<div class="col-sm-3"></div>
+											<div class="col-sm-6">
+												<button type="button" class="btn btn-info btn-block btn-lg" id="applyQRButton">만들기</button>
 											</div>
+											<div class="col-sm-3"></div>
 										</div>
 										<div id="collapseQR" class="panel-collapse collapse">
 											<div class="row" id="qr_code_image_area">
@@ -243,7 +245,9 @@
 								<a href="https://aqr.aplx.link" target="_new"><img src="./images/aqr_image.png" border="0" width="100%" alt="간편하고 안전한 송금 - AQR"></a>
 							</div>
 							<div class="col-sm-6">
-								<a href="https://aqr.aplx.link" target="_new"><img src="./images/aqr_square.png" border="0" width="90px" style="margin:20px"><H4 style="color:#158b7e"><B>계좌번호의 노출없이 안전하게<BR>QR코드로 입금 요청하기 ></B></H4></a>
+								<a href="https://aqr.aplx.link" target="_new"><img src="./images/aqr_square.png" border="0" width="90px" style="margin:20px">
+									<h4 style="color:#158b7e"><b>계좌번호의 노출없이 안전하게<br />QR코드로 입금 요청하기 <i class="ti-arrow-circle-right"></i></b></h4>
+								</a>
 							</div>
 						</div>
 						<div class="row">
@@ -316,14 +320,22 @@
 						</div>
 
                         <div class="col-md-12">
-                            <p><input type="checkbox" name="agree_1" id="agree_1" value="제공"><label class="lab_check"
-                                    for="agree_1"><span class="checkbox"></span> <a
-                                        href="javascript:showPrivacyDialog();">개인정보 처리방침</a> 동의 <span
-                                        class="required">(필수)</span></label></p>
+                            <p>
+                            	<input type="checkbox" name="agree_1" id="agree_1" value="제공">
+                            	<label class="lab_check" for="agree_1">
+                            		<span class="checkbox"></span>&nbsp;
+                            		<a href="javascript:showPrivacyDialog();">개인정보 처리방침</a> 동의 
+                            		<span class="required">(필수)</span>
+                            	</label>
+                            </p>
                             <hr class="m-b-30 m-t-30">
+                            <div class="row">
+                            	<div class="col-sm-3"></div>
+                                <div class="col-sm-6"><input class="btn btn-info btn-lg btn-block" id="email_up_send" type="submit" value="문의하기"></div>
+                                <div class="col-sm-3"></div>
+                            </div>
                             <div class="text-center">
-                                <input class="btn btn-circle btn-brand btn-block" id="email_up_send" type="submit" value="문의하기">
-                                    이 사이트는 reCAPTCHA의 보호를 받으며 Google <a href='https://policies.google.com/privacy' style='color:#333;' target='_blank'>개인 정보 보호 정책</a> 및 <a href='https://policies.google.com/terms' style='color:#333;' target='_blank'>서비스 약관</a>이 적용됩니다.</a>
+                                이 사이트는 reCAPTCHA의 보호를 받으며 Google <a href='https://policies.google.com/privacy' style='color:#333;' target='_blank'>개인 정보 보호 정책</a> 및 <a href='https://policies.google.com/terms' style='color:#333;' target='_blank'>서비스 약관</a>이 적용됩니다.</a>
                             </div>
                             <input type="hidden" name="form_token" id="form_token">
                             <input name="form_kind" id="form_kind" type="hidden" value="recruit">                            
