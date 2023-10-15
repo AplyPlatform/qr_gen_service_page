@@ -34,6 +34,37 @@ let qrval_small_image_param = {
 };
 
 
+let qrCodeBig;
+let qrval_big_image_param = {
+	width: 640,
+	height: 640,
+	image: null,
+	type: "canvas",
+	data: "",
+	dotsOptions: {
+		color: "#000000",
+		type: "square"
+	},
+	backgroundOptions: {
+		color: "#ffffff",
+	},
+	imageOptions: {
+		crossOrigin: "anonymous",        
+		imageSize : 0.4,
+		margin: 0,
+		hideBackgroundDots : true
+	},
+	qrOptions: {
+		errorCorrectionLevel: "L"   
+	},
+	cornersSquareOptions : {
+		type: "square"
+	},
+	cornersDotOptions : {
+		type: "square"
+	}
+};
+
 var goToTop = function() {
 	$('.js-gotop').on('click', function(event){
 
@@ -76,6 +107,7 @@ const genQRCode = (qr_code_url) => {
 	showLoader();
 	GATAGM("genQRClick", "service", qr_code_url);
 	qrCodeSmall.update({data : qr_code_url});
+	qrCodeBig.update({data : qr_code_url});
 	$("#resultArea").show();
 	
 	showDialog("QR코드가 생성되었습니다.<br>스마트폰으로 촬영하여 동작을 확인해 보세요!", null);	
@@ -106,21 +138,27 @@ const initQRCode = () => {
 	});
 
 	qrCodeSmall = new QRCodeStyling(qrval_small_image_param);
-	qrCodeSmall.append(document.getElementById("qr_sm_image_1"));		
+	qrCodeSmall.append(document.getElementById("qr_sm_image_1"));
+
+	qrCodeBig = new QRCodeStyling(qrval_big_image_param);
+	qrCodeBig.append(document.getElementById("qr_big_image_1"));
 	
 	let colorInputfg = document.querySelector('#color_fg');
 	colorInputfg.addEventListener('input', () =>{	  
 	  qrCodeSmall.update({dotsOptions : {color : colorInputfg.value}});
+	  qrCodeBig.update({dotsOptions : {color : colorInputfg.value}});
 	});
   
 	let colorInputbg = document.querySelector('#color_bg');
 	colorInputbg.addEventListener('input', () =>{
 	  qrCodeSmall.update({backgroundOptions : {color : colorInputbg.value}});
+	  qrCodeBig.update({backgroundOptions : {color : colorInputbg.value}});
 	});
 
 	$(".qrDownloadButton").click(function () {    
 		let form_image_kind = $(this).attr("id_val");
-		qrCodeSmall.download({ name: "QR", extension: form_image_kind });
+		//qrCodeSmall.download({ name: "QR", extension: form_image_kind });
+		qrCodeBig.download({ name: "QR", extension: form_image_kind });
 	});
 
 	$("#form_qr_shape").change(function() { 
@@ -140,6 +178,7 @@ const initQRCode = () => {
 	  param.cornersDotOptions.type = cdoOption;
   	  
 	  qrCodeSmall.update(param);
+	  qrCodeBig.update(param);
 	});
   
 	$("#qr_image_input").change(function(e){
@@ -147,6 +186,7 @@ const initQRCode = () => {
 	  reader.readAsDataURL($('#qr_image_input')[0].files[0]);
 	  reader.onload = function () {
 		qrCodeSmall.update({image:reader.result});
+		qrCodeBig.update({image:reader.result});
 		$("#qr_image_input").hide();
 		$("#cancelImageButton").show();
 	  };
@@ -157,7 +197,8 @@ const initQRCode = () => {
 	});
   
 	$("#cancelImageButton").click(function() {	  
-	  qrCodeSmall.update({image:null });
+	  qrCodeSmall.update({image:null});
+	  qrCodeBig.update({image:null});
 	  $("#qr_image_input").val("");
 	  $("#qr_image_input").show();
 	  $("#cancelImageButton").hide();
@@ -172,6 +213,23 @@ const initQRCode = () => {
 	  $("#color_bg").val("#ffffff");
 	  $("#form_qr_shape").val("square").prop("selected", true);	  
 	  qrCodeSmall.update(qrval_small_image_param);
+	  qrCodeBig.update(qrval_big_image_param);
+	});
+
+	$("#printButton").click(function() {
+		GATAGM("printButton", "service", "service");
+		$("#printButton").hide();
+		showLoader();
+		$('#qr_code_image_area').printThis({
+		  importCSS: false,
+		  header: ""
+		});
+	
+		setTimeout(() => {
+		  $("#printButton").show();
+		  hideLoader();
+		}, 5000);
+		return false;
 	});
 
 	hideLoader();
