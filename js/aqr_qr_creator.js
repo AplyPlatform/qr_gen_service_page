@@ -67,7 +67,6 @@ let qrval_big_image_param = {
 
 var goToTop = function() {
 	$('.js-gotop').on('click', function(event){
-
 		event.preventDefault();
 
 		$('html, body').animate({
@@ -78,7 +77,6 @@ var goToTop = function() {
 	});
 
 	$(window).scroll(function(){
-
 		var $win = $(window);
 		if ($win.scrollTop() > 200) {
 			$('.js-top').addClass('active');
@@ -655,7 +653,7 @@ function ajaxRequestForContact(form_id, fed) {
 	});
 }
 
-function GA_EVENT(event_name, category, label) {    
+function GA_EVENT(event_name, category, label = "") {    
     gtag(
         'event', event_name, {
         'event_category': category,
