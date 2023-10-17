@@ -349,7 +349,7 @@ const initQRCode = () => {
 			}
 		}
 				
-		genQRCode(kind, genStr);
+		genQRCode(genStr);
 		saveQRdata(kind);
 	});
 
