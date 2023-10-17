@@ -143,7 +143,7 @@ function checkIsExistProperty(data, field) {
 
 const genQRCode = (qr_code_url) => {
 	if (qr_code_url == "") {
-		showDialog("올바른 정보를 입력해 주세요.", null);
+		showDialog("올바른 정보를 입력해 주세요.");
 		return;
 	}
 
@@ -337,14 +337,14 @@ const initQRCode = () => {
 		if (kind == "wifi") {
 			genStr = generateWIFIData();
 			if (genStr == "") {
-				showDialog("올바른 WiFi 정보를 입력해 주세요.", null);
+				showDialog("올바른 WiFi 정보를 입력해 주세요.");
 				return;
 			}	
 		}
 		else {
 			genStr = generateQRData();
 			if (genStr == "") {
-				showDialog("올바른 " + $("#form_kind option:checked").text() + "을(를) 입력해 주세요.", null);
+				showDialog("올바른 " + $("#form_kind option:checked").text() + "을(를) 입력해 주세요.");
 				return;
 			}
 		}
