@@ -153,7 +153,6 @@ const genQRCode = (qr_code_url) => {
 }
 
 function saveQRdata(kind) {
-
 	showLoader();
 	
 	let fd = new FormData();
@@ -194,6 +193,8 @@ const setQRKindArea = (kindStr) => {
 
 	if (kindStr == "aqr") {
 		window.open("https://aplx.link/register", "_blank");
+		$("#form_kind").val("url").prop("selected", true);
+		$("#form_input_label").text("인터넷 주소 입력");
 		return;
 	}
 	else if (kindStr == "wifi") {
@@ -211,26 +212,9 @@ const setQRKindArea = (kindStr) => {
 const initQRCode = () => {
 	showLoader();
 
-	const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    let qr_action = urlParams.get('kind');
-	let qr_id = urlParams.get('id');
-
-	if (isSet(qr_id)) {
-		reqQRIDdata(qr_id);
-	}
-	else if (isSet(qr_action)) {
-		$("#form_kind").val(qr_action).prop("selected", true);
-		setQRKindArea(qr_action);
-	}
-
 	grecaptcha.ready(function () {
 		isRecaptchaInit = true;			
-	});
-
-	$("#form_kind").change(function() {
-		setQRKindArea($("#form_kind option:checked").val());
-	});
+	});	
 
 	qrCodeSmall = new QRCodeStyling(qrval_small_image_param);
 	qrCodeSmall.append(document.getElementById("qr_sm_image_1"));
@@ -353,6 +337,23 @@ const initQRCode = () => {
 
 	setSubmitHandler("email_up");
 	goToTop();
+
+	const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let qr_action = urlParams.get('kind');
+	let qr_id = urlParams.get('id');
+
+	if (isSet(qr_id)) {
+		reqQRIDdata(qr_id);
+	}
+	else if (isSet(qr_action)) {
+		$("#form_kind").val(qr_action).prop("selected", true);
+		setQRKindArea(qr_action);
+	}
+
+	$("#form_kind").change(function() {
+		setQRKindArea($("#form_kind option:checked").val());
+	});
 
 	hideLoader();
   }
