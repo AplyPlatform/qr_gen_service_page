@@ -116,7 +116,7 @@ function generateWIFIData() {
 		return "";
 	}
 
-	let hidden = $('#form_hidden').is(':checked');
+	let hidden = true; //$('#form_hidden').is(':checked');
 	let enc = $('#form_enc').val();	
 	let key = "";
 	if (enc != 'nopass') {

@@ -119,8 +119,8 @@
 						<div class="row" style="margin-top:30px">
 							<div class="col-md-12 mb-4">
 								<div class="card h-100 py-2">
-									<div class="card-body">									
-										<div class="row">											
+									<div class="card-body">
+										<div class="row">			
 											<div class="col-sm-6 text-center">
 												<div class="form-group">
 													<label for="form_kind" class="control-label">QR코드 종류 선택</label>
@@ -131,14 +131,14 @@
 														<option value="wifi">WiFi</option>
 														<option value="aqr">계좌번호</option>
 													</select>
-												</div>									
-											</div>								
+												</div>
+											</div>
 											<div class="col-sm-6 text-left" id="normal_input_area">
 												<div class="form-group">
 													<label for="form_date" class="form-label" id="form_input_label">인터넷 주소 입력</label>
 													<input type="text" id="form_data" name="form_data" class="form-control" value="" placeholder="http://">
 												</div>
-											</div>											
+											</div>
 										</div>
 										<div class="row" id="wifi_input_area" style="display:none;">
 											<div class="col-sm-4 text-left">
@@ -146,12 +146,18 @@
 													<label for="form_ssid" class="control-label">SSID</label>
 													<div class="input-group">
 														<span id="basic-addon-ssid" class="input-group-addon"><i class="fa fa-wifi"></i></span>
-														<input type="text" id="form_ssid" name="form_ssid" class="form-control" placeholder="SSID" aria-describedby="basic-addon-ssid" required>											
+														<input type="text" id="form_ssid" name="form_ssid" class="form-control" placeholder="SSID" aria-describedby="basic-addon-ssid" required>
 													</div>
-													<label class="pull-left control-label" for="form_hidden">숨겨져 있음</label>
-													&nbsp;<input type="checkbox" name="form_hidden" id="form_hidden" data-toggle="tooltip" title="SSID가 숨겨져 있음">
+													<!-- // <label class="pull-left control-label" for="form_hidden">숨겨져 있음</label>
+													&nbsp;<input type="checkbox" name="form_hidden" id="form_hidden" data-toggle="tooltip" title="SSID가 숨겨져 있음" checked> // -->
 												</div>
-											</div>								
+											</div>
+											<div class="col-sm-4 text-left">
+												<div class="form-group">
+													<label for="form_password" class="form-label">패스워드</label>
+													<input type="text" id="form_password" name="form_password" class="form-control" value="" placeholder="PASSWORD">
+												</div>
+											</div>
 											<div class="col-sm-4 text-left">
 												<div class="form-group">
 													<label for="form_enc" class="control-label">암호화 방법</label>
@@ -160,12 +166,6 @@
 														<option value="WEP">WEP</option>
 														<option value="nopass">None</option>
 													</select>
-												</div>									
-											</div>								
-											<div class="col-sm-4 text-left">
-												<div class="form-group">
-													<label for="form_password" class="form-label">패스워드</label>
-													<input type="text" id="form_password" name="form_password" class="form-control" value="" placeholder="PASSWORD">
 												</div>
 											</div>											
 										</div>
