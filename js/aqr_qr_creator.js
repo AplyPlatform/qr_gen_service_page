@@ -96,8 +96,7 @@ function hideLoader() {
 }
 
 function escape_string(string) {
-	let to_escape = ['\\', ';', ',', ':', '"'];
-	let hex_only = /^[0-9a-f]+$/i;
+	let to_escape = [';', ':'];	
 	let output = "";
 	for (var i=0; i<string.length; i++) {
 		if($.inArray(string[i], to_escape) != -1) {
@@ -110,11 +109,15 @@ function escape_string(string) {
 	return output;
 }
 
+var utf8_encode = function (s) {
+	return unescape(encodeURIComponent(s));
+};
+
 function generateWIFIData() {
 	let ssid = $('#form_ssid').val();
 	if(isSet(ssid) == false || ssid == "") {		
 		return "";
-	}
+	}	
 
 	let hidden = true; //$('#form_hidden').is(':checked');
 	let enc = $('#form_enc').val();	
@@ -123,7 +126,7 @@ function generateWIFIData() {
 		key = $('#form_password').val();		
 	}
 
-	var qrstring = 'WIFI:S:'+escape_string(ssid)+';T:'+enc+';P:'+escape_string(key)+';';
+	var qrstring = 'WIFI:S:'+escape_string(utf8_encode(ssid))+';T:'+enc+';P:'+escape_string(key)+';';
 	if (hidden) {
 		qrstring += 'H:true';
 	}
@@ -216,10 +219,10 @@ const initQRCode = () => {
 		isRecaptchaInit = true;			
 	});	
 
-	qrCodeSmall = new QRCodeStyling(qrval_small_image_param);
+	qrCodeSmall = new QRCodeStyling(qrval_small_image_param);	
 	qrCodeSmall.append(document.getElementById("qr_sm_image_1"));
 
-	qrCodeBig = new QRCodeStyling(qrval_big_image_param);
+	qrCodeBig = new QRCodeStyling(qrval_big_image_param);	
 	qrCodeBig.append(document.getElementById("qr_big_image_1"));
 	
 	let colorInputfg = document.querySelector('#color_fg');
