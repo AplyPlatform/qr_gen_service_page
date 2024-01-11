@@ -316,6 +316,11 @@ const initQRCode = () => {
 
 	$("#applyQRButton").click(function() {
 
+		if ($("#agree_privacy").is(":checked") == false) {
+			showDialog("개인정보 처리방침에 동의해주세요.");			
+			return false;
+		}
+
 		let genStr = "";
 		let kind = $("#form_kind option:checked").val();
 
@@ -688,8 +693,14 @@ function isSet(value) {
     return true;
 }
 
-function showPrivacyDialog() {	
+function showPrivacyForContactDialog() {	
 	$('#modal_title_content').text("APLY 개인정보처리방침");
     $('#modal_body_content').load("privacy_for_email.html");
+    $('#modal-3').modal('show');
+}
+
+function showPrivacyDialog() {	
+	$('#modal_title_content').text("APLY 개인정보처리방침");
+    $('#modal_body_content').load("privacy.html");
     $('#modal-3').modal('show');
 }

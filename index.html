@@ -121,7 +121,7 @@
 								<div class="card h-100 py-2">
 									<div class="card-body">
 										<div class="row">			
-											<div class="col-sm-6 text-center">
+											<div class="col-sm-6 text-left">
 												<div class="form-group">
 													<label for="form_kind" class="control-label">QR코드 종류 선택</label>
 													<select name="form_kind" id="form_kind" class="form-control">
@@ -172,6 +172,12 @@
 										<div class="row">
 											<div class="col-sm-3"></div>
 											<div class="col-sm-6">
+												<input type="checkbox" name="agree_privacy" id="agree_privacy" value="제공">
+												<label class="lab_check" for="agree_1">
+													<span class="checkbox"></span>&nbsp;
+													<a href="javascript:showPrivacyDialog();">개인정보 처리방침</a> 동의 
+													<span class="required">(필수)</span>
+												</label>
 												<button type="button" class="btn btn-info btn-block btn-lg" id="applyQRButton">만들기</button>																								
 											</div>
 											<div class="col-sm-3"></div>
@@ -184,6 +190,11 @@
 											</div>
 										</div>
 										<div id="resultArea" style="display:none;">
+											<div class="row">
+												<div class="col-sm-12">
+													<hr size="1" color="#eee">
+												</div>
+											</div>
 											<div class="row">
 												<div class="col-sm-12 align-items-center justify-content-center">
 													<center>
@@ -230,12 +241,16 @@
 														<button class="btn btn-warning dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 															<i class="fa fa-download"></i> 다운로드</span>
 														</button>
-														<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-															<ul>																
-																<li class="dropdown-item"><HR><a class="qrDownloadButton" id_val="png" style="cursor:pointer;font-size:16px;">PNG파일 받기</a><HR></li>
-																<li class="dropdown-item"><a class="qrDownloadButton" id_val="jpg" style="cursor:pointer;font-size:16px;">JPG파일 받기</a><HR></li>
-																<li class="dropdown-item"><a class="qrDownloadButton" id_val="svg" style="cursor:pointer;font-size:16px;">SVG파일 받기</a><HR></li>
-															</ul>
+														<div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+																<center>
+																<HR>
+																- <a class="qrDownloadButton" id_val="png" style="cursor:pointer;font-size:16px;">PNG파일 받기</a>
+																<HR>
+																- <a class="qrDownloadButton" id_val="jpg" style="cursor:pointer;font-size:16px;">JPG파일 받기</a>
+																<HR>
+																- <a class="qrDownloadButton" id_val="svg" style="cursor:pointer;font-size:16px;">SVG파일 받기</a>
+																<HR>
+																</center>
 														</div>
 													</div>
 												</div>
@@ -252,12 +267,12 @@
 													</button>
 												</div>												
 											</div>
-										</div>
-										<div class="row">
-											<div class="col-sm-12">
-												<hr size="1" color="#eee">
-											</div>											
-										</div>				
+											<div class="row">
+												<div class="col-sm-12">
+													<hr size="1" color="#eee">
+												</div>
+											</div>
+										</div>										
 									</div>		
 								</div>
 							</div>
@@ -305,84 +320,86 @@
 
 		<div class="gtco-services gtco-section">
             <div class="gtco-container">
-                <form role="form" method="post" id="email_up">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-								<div class="form-control" style="height:auto; padding-bottom:.05rem;">
-								<div class="row">                                
-								  <div class="col-12 col-md-3 p-b-10">
-									  <input type="checkbox" id="min_type_1" name="min_type_1" value="기타">
-									  <label class="lab_check" for="min_type_1"><span class="checkbox"></span> &nbsp;서비스 문의</label>
-								  </div>								  
-								  <div class="col-12 col-md-3 p-b-10">
-									<input type="checkbox" id="min_type_2" name="min_type_2" value="제휴">
-									<label class="lab_check" for="min_type_2"><span class="checkbox"></span> &nbsp;제휴 및 협업</label>
-								  </div>
-								  <div class="col-12 col-md-3 p-b-10">
-									<input type="checkbox" id="min_type_3" name="min_type_3" value="SW개발"> 
-									<label class="lab_check" for="min_type_3"><span class="checkbox"></span> &nbsp;SW 개발</label>
-								  </div>
-								  <div class="col-12 col-md-3 p-b-10">
-									<input type="checkbox" id="min_type_4" name="min_type_4" value="기타문의"> 
-									<label class="lab_check" for="min_type_4"><span class="checkbox"></span> &nbsp;기타 문의</label>
-								  </div>
+				<div class="service-wrap">
+	        		<div class="service">
+						<form role="form" method="post" id="email_up">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="form-group">
+										<div class="form-control" style="height:auto; padding-bottom:.05rem;">
+										<div class="row">                                
+										<div class="col-12 col-md-3 p-b-10">
+											<input type="checkbox" id="min_type_1" name="min_type_1" value="기타">
+											<label class="lab_check" for="min_type_1"><span class="checkbox"></span> &nbsp;서비스 문의</label>
+										</div>								  
+										<div class="col-12 col-md-3 p-b-10">
+											<input type="checkbox" id="min_type_2" name="min_type_2" value="제휴">
+											<label class="lab_check" for="min_type_2"><span class="checkbox"></span> &nbsp;제휴 및 협업</label>
+										</div>
+										<div class="col-12 col-md-3 p-b-10">
+											<input type="checkbox" id="min_type_3" name="min_type_3" value="SW개발"> 
+											<label class="lab_check" for="min_type_3"><span class="checkbox"></span> &nbsp;SW 개발</label>
+										</div>
+										<div class="col-12 col-md-3 p-b-10">
+											<input type="checkbox" id="min_type_4" name="min_type_4" value="기타문의"> 
+											<label class="lab_check" for="min_type_4"><span class="checkbox"></span> &nbsp;기타 문의</label>
+										</div>
+										</div>
+										<p class="help-block text-danger"></p>
+										</div>
+									</div>
 								</div>
-								<p class="help-block text-danger"></p>
+								<div class="col-lg-4">
+									<div class="form-group">
+										<input class="form-control" type="text" name="form_name" id="form_name" placeholder="이름"
+											required="">
+										<p class="help-block text-danger"></p>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="form-group">
+										<input class="form-control" type="text" name="form_phone" id="form_phone"
+											placeholder="전화번호(-없이 입력해주세요)" required="" pattern="\d+">
+										<p class="help-block text-danger"></p>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="form-group">
+										<input class="form-control" type="text" name="form_email" id="form_email"
+											placeholder="이메일 주소" required="">
+										<p class="help-block text-danger"></p>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea class="form-control" name="form_content" id="form_content" rows="7" placeholder="문의 내용" required=""></textarea>
+										<p class="help-block text-danger"></p>
+									</div>
+								</div>
+
+								<div class="col-md-12 text-center">									
+									<input type="checkbox" name="agree_1" id="agree_1" value="제공">
+									<label class="lab_check" for="agree_1">
+										<span class="checkbox"></span>&nbsp;
+										<a href="javascript:showPrivacyForContactDialog();">개인정보 처리방침</a> 동의 
+										<span class="required">(필수)</span>
+									</label>									
 								</div>
 							</div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="form_name" id="form_name" placeholder="이름"
-                                    required="">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="form_phone" id="form_phone"
-                                    placeholder="전화번호(-없이 입력해주세요)" required="" pattern="\d+">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="form_email" id="form_email"
-                                    placeholder="이메일 주소" required="">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<textarea class="form-control" name="form_content" id="form_content" rows="7" placeholder="문의 내용" required=""></textarea>
-								<p class="help-block text-danger"></p>
+							<div class="row">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-6"><input class="btn btn-info btn-lg btn-block" id="email_up_send" type="submit" value="문의하기"></div>
+								<div class="col-sm-3"></div>
+							</div>
+							<input type="hidden" name="form_token" id="form_token">
+							<input name="form_kind" id="form_kind" type="hidden" value="recruit">                            
+						</form>
+						<div class="row">					
+							<div class="col-md-12 text-center">
+								<hr class="m-b-30 m-t-30">
+								이 사이트는 reCAPTCHA의 보호를 받으며 Google <a href='https://policies.google.com/privacy' style='color:#333;' target='_blank'>개인 정보 보호 정책</a> 및 <a href='https://policies.google.com/terms' style='color:#333;' target='_blank'>서비스 약관</a>이 적용됩니다.
 							</div>
 						</div>
-
-                        <div class="col-md-12">
-                            <p>
-                            	<input type="checkbox" name="agree_1" id="agree_1" value="제공">
-                            	<label class="lab_check" for="agree_1">
-                            		<span class="checkbox"></span>&nbsp;
-                            		<a href="javascript:showPrivacyDialog();">개인정보 처리방침</a> 동의 
-                            		<span class="required">(필수)</span>
-                            	</label>
-                            </p>
-                            <hr class="m-b-30 m-t-30">
-                            <div class="row">
-                            	<div class="col-sm-3"></div>
-                                <div class="col-sm-6"><input class="btn btn-info btn-lg btn-block" id="email_up_send" type="submit" value="문의하기"></div>
-                                <div class="col-sm-3"></div>
-                            </div>                            
-                            <input type="hidden" name="form_token" id="form_token">
-                            <input name="form_kind" id="form_kind" type="hidden" value="recruit">                            
-                        </div>
-                    </div>
-                </form>
-				<div class="row">
-					<div class="col-md-12 text-center">	
-						이 사이트는 reCAPTCHA의 보호를 받으며 Google <a href='https://policies.google.com/privacy' style='color:#333;' target='_blank'>개인 정보 보호 정책</a> 및 <a href='https://policies.google.com/terms' style='color:#333;' target='_blank'>서비스 약관</a>이 적용됩니다.
 					</div>
 				</div>
             </div>
