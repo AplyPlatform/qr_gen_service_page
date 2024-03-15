@@ -504,7 +504,7 @@ function sendApplicationData(form_id, token)
 	}
 
 	if ($(form_id).find('input[name="min_type_2"]').is(":checked")) {
-		min_type = min_type + "/제휴및협업";
+		min_type = min_type + "/제휴및광고";
 	}
 
 	if ($(form_id).find('input[name="min_type_3"]').is(":checked")) {
