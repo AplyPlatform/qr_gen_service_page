@@ -155,7 +155,7 @@ const genQRCode = (qr_code_url) => {
 	$("#resultArea").show();
 }
 
-function saveQRdata(kind) {
+function saveQRdata(kind, genStr) {
 	showLoader();
 	
 	let fd = new FormData();
@@ -171,6 +171,8 @@ function saveQRdata(kind) {
 	callApi({
 		data : fd,
 		success : function(data) {
+			genQRCode(genStr);
+			
 			if (checkIsExistProperty(data, "data") && checkIsExistProperty(data.data, "qr_id")) setSecretCodeBtn(data.data.qr_id);			
 
 			showDialog("QR코드가 생성되었습니다.<br>스마트폰으로 촬영하여 동작을 확인해 보세요!");
@@ -181,11 +183,8 @@ function saveQRdata(kind) {
 			
 		},
 		error : function() {
-			showDialog("QR코드가 생성되었습니다.<br>스마트폰으로 촬영하여 동작을 확인해 보세요!");
-			hideLoader();
-			$('html, body').animate({
-				scrollTop: $("#resultArea").offset().top
-			}, 500, 'easeInOutExpo');
+			showDialog("QR코드가 생성에 실패하였습니다. 잠시 후 다시 시도해 주세요.");
+			hideLoader();			
 		}
 	});
 }
@@ -345,9 +344,8 @@ const initQRCode = () => {
 				return;
 			}
 		}
-				
-		genQRCode(genStr);
-		saveQRdata(kind);
+		
+		saveQRdata(kind, genStr);
 	});
 
 	setSubmitHandler("email_up");
