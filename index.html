@@ -16,15 +16,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<meta name="description" content="QR코드 만들기 - APLY"/>
 	<meta name="keywords" content="QR,큐알,코드,mass,prooduction,CODE,WIFI,인터넷,웹,INTERNET,APLY,관리,인프라,솔루션,설비,대량"/>
-	<meta name="author" content="aply.biz"/>
-	<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico"/>	
-  	<!-- Facebook and Twitter integration -->
+	<meta name="author" content="aply.biz"/>	  	
 	<meta property="og:title" content="QR코드 만들기 - APLY"/>
 	<meta property="og:image" content="./images/site_title.png"/>
 	<meta property="og:url" content="https://qr.aply.biz"/>
 	<meta property="og:site_name" content="QR코드 만들기 - APLY"/>
 	<meta property="og:description" content="간편하게 QR코드 만들기 - APLY"/>
 	
+	<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico"/>	
 	<link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Abel|Raleway|Roboto|Noto+Sans+KR" rel="stylesheet">
@@ -140,34 +139,45 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" id="wifi_input_area" style="display:none;">
-											<div class="col-sm-4 text-left">
-												<div class="form-group has-feedback">
-													<label for="form_ssid" class="control-label">SSID</label>
-													<div class="input-group">
-														<span id="basic-addon-ssid" class="input-group-addon"><i class="fa fa-wifi"></i></span>
-														<input type="text" id="form_ssid" name="form_ssid" class="form-control" placeholder="SSID" aria-describedby="basic-addon-ssid" required>
+										<div id="wifi_input_area" style="display:none;">
+											
+											<div class="row">
+												<div class="col-sm-4 text-left">
+													<div class="form-group has-feedback">
+														<label for="form_ssid" class="control-label">SSID</label>
+														<div class="input-group">
+															<span id="basic-addon-ssid" class="input-group-addon"><i class="fa fa-wifi"></i></span>
+															<input type="text" id="form_ssid" name="form_ssid" class="form-control" placeholder="SSID" aria-describedby="basic-addon-ssid" required>
+														</div>
+														<!-- // <label class="pull-left control-label" for="form_hidden">숨겨져 있음</label>
+														&nbsp;<input type="checkbox" name="form_hidden" id="form_hidden" data-toggle="tooltip" title="SSID가 숨겨져 있음" checked> // -->
 													</div>
-													<!-- // <label class="pull-left control-label" for="form_hidden">숨겨져 있음</label>
-													&nbsp;<input type="checkbox" name="form_hidden" id="form_hidden" data-toggle="tooltip" title="SSID가 숨겨져 있음" checked> // -->
+												</div>
+												<div class="col-sm-4 text-left">
+													<div class="form-group">
+														<label for="form_password" class="form-label">패스워드</label>
+														<input type="text" id="form_password" name="form_password" class="form-control" value="" placeholder="PASSWORD">
+													</div>
+												</div>
+												<div class="col-sm-4 text-left">
+													<div class="form-group">
+														<label for="form_enc" class="control-label">암호화 방법</label>
+														<select name="form_enc" id="form_enc" class="form-control">
+															<option value="WPA">WPA/WPA2/WPA3</option>
+															<option value="WEP">WEP</option>
+															<option value="nopass">None</option>
+														</select>
+													</div>
 												</div>
 											</div>
-											<div class="col-sm-4 text-left">
-												<div class="form-group">
-													<label for="form_password" class="form-label">패스워드</label>
-													<input type="text" id="form_password" name="form_password" class="form-control" value="" placeholder="PASSWORD">
+											<div class="row justify-content-center">												
+												<div class="col-sm-8 text-center">
+													<div style="background-color:#dbfffc;padding:5px;border-radius: 5px;">
+														<i class="fa fa-exclamation-triangle"></i> <span style="color:#000;font-size:12px;">SSID, 패스워드의 영문 대소문자를 정확하게 입력하세요.</span>
+													</div>
 												</div>
+												<div class="col-sm-4"></div>
 											</div>
-											<div class="col-sm-4 text-left">
-												<div class="form-group">
-													<label for="form_enc" class="control-label">암호화 방법</label>
-													<select name="form_enc" id="form_enc" class="form-control">
-														<option value="WPA">WPA/WPA2/WPA3</option>
-														<option value="WEP">WEP</option>
-														<option value="nopass">None</option>
-													</select>
-												</div>
-											</div>											
 										</div>
 										<div class="row">
 											<div class="col-sm-3"></div>
