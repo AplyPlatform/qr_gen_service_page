@@ -395,10 +395,7 @@ const initQRCode = () => {
 	}		
 
 	setSecretCodeBtn(qr_id);
-	genQRCode(qrData);
-	$('html, body').animate({
-		scrollTop: $("#resultArea").offset().top
-	}, 500, 'easeInOutExpo');
+	
   }
 
   function setSecretCodeBtn(qr_id) {	
