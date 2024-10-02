@@ -174,11 +174,18 @@ function saveQRdata(kind) {
 			if (checkIsExistProperty(data, "data") && checkIsExistProperty(data.data, "qr_id")) setSecretCodeBtn(data.data.qr_id);			
 
 			showDialog("QR코드가 생성되었습니다.<br>스마트폰으로 촬영하여 동작을 확인해 보세요!");
-			hideLoader();
+			hideLoader();			
+			$('html, body').animate({
+				scrollTop: $("#resultArea").offset().top
+			}, 500, 'easeInOutExpo');
+			
 		},
 		error : function() {
 			showDialog("QR코드가 생성되었습니다.<br>스마트폰으로 촬영하여 동작을 확인해 보세요!");
 			hideLoader();
+			$('html, body').animate({
+				scrollTop: $("#resultArea").offset().top
+			}, 500, 'easeInOutExpo');
 		}
 	});
 }
