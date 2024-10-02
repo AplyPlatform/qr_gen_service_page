@@ -172,7 +172,7 @@ function saveQRdata(kind, genStr) {
 		data : fd,
 		success : function(data) {
 			genQRCode(genStr);
-			
+
 			if (checkIsExistProperty(data, "data") && checkIsExistProperty(data.data, "qr_id")) setSecretCodeBtn(data.data.qr_id);			
 
 			showDialog("QR코드가 생성되었습니다.<br>스마트폰으로 촬영하여 동작을 확인해 보세요!");
@@ -396,6 +396,9 @@ const initQRCode = () => {
 
 	setSecretCodeBtn(qr_id);
 	genQRCode(qrData);
+	$('html, body').animate({
+		scrollTop: $("#resultArea").offset().top
+	}, 500, 'easeInOutExpo');
   }
 
   function setSecretCodeBtn(qr_id) {	
