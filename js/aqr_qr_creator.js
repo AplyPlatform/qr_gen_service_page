@@ -394,6 +394,7 @@ const initQRCode = () => {
 
 	setSecretCodeBtn(qr_id);
 	genQRCode(qrData);
+	$("#qr_button_area").hide();
   }
 
   function setSecretCodeBtn(qr_id) {	
