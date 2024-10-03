@@ -525,8 +525,8 @@ form label {font-weight: normal !important;}
   -o-background-size: cover;
 }
 
-#gtco-header2 {  
-  background-color: #6668a9;
+#gtco-header2 {      
+  background : linear-gradient(#6668a9 80%, #c9fff8);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
