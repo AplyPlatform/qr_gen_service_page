@@ -394,6 +394,13 @@ const initQRCode = () => {
 
 	setSecretCodeBtn(qr_id);
 	genQRCode(qrData);
+	
+	$("#form_kind").prop('disabled',false);
+	$("#form_data").prop('disabled',false);
+	$("#form_ssid").prop('disabled',false);
+	$("#form_enc").prop('disabled',false);
+	$("#form_password").prop('disabled',false);
+	$("#warn_area").hide();
 	$("#qr_button_area").hide();
   }
 
