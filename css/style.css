@@ -902,23 +902,23 @@ form label {font-weight: normal !important;}
 }
 
 .btn-special {
-  background: #00ffa3;
-  color: #239c71;
-  border: 2px solid #00ffa3;
+  background: #6668a9;
+  color: #fff;
+  border: 2px solid #6668a9;
 }
 .btn-special:hover, .btn-special:focus, .btn-special:active {
-  color: #239c71;
-  background: #00ffa3;
-  border-color: #00ffa3;
+  color: #fff;
+  background: #6668a9;
+  border-color: #6668a9;
 }
 .btn-special.btn-outline {
   color: #fff;
-  border: 2px solid #00ffa3;
+  border: 2px solid #6668a9;
 }
 .btn-special.btn-outline:hover, .btn-special.btn-outline:focus, .btn-special.btn-outline:active {
   background: #fff;
   color: #000;
-  border: 2px solid #00ffa3;
+  border: 2px solid #6668a9;
 }
 
 .btn-outline {
@@ -963,7 +963,7 @@ form label {font-weight: normal !important;}
 .form-control:active, .form-control:focus {
   outline: none;
   box-shadow: none;
-  border-color: #17B794;
+  border-color: #6668a9;
 }
 
 .row-pb-md {padding-bottom: 4em !important;}
@@ -971,8 +971,8 @@ form label {font-weight: normal !important;}
 
 #loading {background-color:rgba(255, 255, 255, 0.3); width: 100%;height: 100%;top: 0px;left: 0px;position: fixed;display: block; z-index: 99}
 .loader {
-  border: 10px solid #f3f3f3; /* Light grey */
-  border-top: 10px solid #5af; /* Blue */
+  border: 3px solid #f3f3f3; /* Light grey */
+  border-top: 3px solid #6668a9; /* Blue */
   border-radius: 50%;
   width: 40px;
   height: 40px;
