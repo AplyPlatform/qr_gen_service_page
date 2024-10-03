@@ -402,6 +402,12 @@ const initQRCode = () => {
 	$("#form_password").prop('disabled',false);
 	$("#warn_area").hide();
 	$("#qr_button_area").hide();
+	$("#new_make_qr_button_area").show();
+
+	$("#newQRButton").click(function() {
+		GA_EVENT("newQRButton_click", "service", "click");
+		location.href = "https://qr.aply.biz";
+	});
   }
 
   function setSecretCodeBtn(qr_id) {	
