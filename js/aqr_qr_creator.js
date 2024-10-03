@@ -243,8 +243,14 @@ const initQRCode = () => {
 
 	$(".qrDownloadButton").click(function () {    
 		let form_image_kind = $(this).attr("id_val");
-		//qrCodeSmall.download({ name: "QR", extension: form_image_kind });
 		qrCodeBig.download({ name: "QR", extension: form_image_kind });
+
+		$(".qrDownloadButton").hide();
+		showLoader();	
+		setTimeout(() => {
+		  $(".qrDownloadButton").show();
+		  hideLoader();
+		}, 5000);
 	});
 
 	$("#form_qr_shape").change(function() { 
