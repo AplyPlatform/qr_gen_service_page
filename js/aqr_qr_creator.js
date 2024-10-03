@@ -426,6 +426,9 @@ const initQRCode = () => {
 				setQRData(qr_id, data.data);
 				showDialog("QR 코드 정보를 성공적으로 불러왔습니다.");
 			}
+			else {
+				showDialog("존재하지 않는 고유 코드입니다.");
+			}
 
 			hideLoader();			
 		},
