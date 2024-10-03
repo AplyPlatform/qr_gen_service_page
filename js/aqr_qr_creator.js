@@ -146,9 +146,7 @@ const genQRCode = (qr_code_url) => {
 	if (qr_code_url == "") {
 		showDialog("올바른 정보를 입력해 주세요.");
 		return;
-	}
-
-	GA_EVENT("genQRClick", "service", qr_code_url);
+	}	
 
 	qrCodeSmall.update({data : qr_code_url});
 	qrCodeBig.update({data : qr_code_url});
@@ -345,6 +343,7 @@ const initQRCode = () => {
 			}
 		}
 		
+		GA_EVENT("genQRClick", "service", genStr);
 		saveQRdata(kind, genStr);
 	});
 
@@ -394,7 +393,7 @@ const initQRCode = () => {
 	}		
 
 	setSecretCodeBtn(qr_id);
-	
+	genQRCode(qrData);
   }
 
   function setSecretCodeBtn(qr_id) {	
