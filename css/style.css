@@ -82,14 +82,14 @@ body {margin: 0; font-family: 'Roboto', 'Noto Sans KR', Arial, sans-serif; font-
   content: "";
 }
 
-a {color: #45cdba; -webkit-transition: 0.5s; -o-transition: 0.5s; transition: 0.5s;}
-a:hover, a:active, a:focus {color: #45cdba; outline: none; text-decoration: none;}
+a {color: #6668a9; -webkit-transition: 0.5s; -o-transition: 0.5s; transition: 0.5s;}
+a:hover, a:active, a:focus {color: #6668a9; outline: none; text-decoration: none;}
 p {margin-bottom: 20px;}
 h1, h2, h3, h4, h5, h6, figure {color:#4d4d4d; font-weight: 400; margin: 0 0 20px 0;}
 
-::-webkit-selection {color: #fff; background: #45cdba;}
-::-moz-selection {color: #fff; background: #45cdba;}
-::selection {color: #fff; background: #45cdba;;}
+::-webkit-selection {color: #fff; background: #6668a9;}
+::-moz-selection {color: #fff; background: #6668a9;}
+::selection {color: #fff; background: #6668a9;;}
 
 .gtco-container {max-width: 1140px; position: relative; margin: 0 auto; padding-left: 15px; padding-right: 15px;}
 .gtco-nav {position: relative; top: 0; margin: 0; padding: 0; width: 100%; padding: 10px 0; z-index: 1001; background: #fff;}
@@ -107,7 +107,7 @@ h1, h2, h3, h4, h5, h6, figure {color:#4d4d4d; font-weight: 400; margin: 0 0 20p
 
 
 .gtco-nav #gtco-logo {font-size: 20px; margin: 0; padding: 0; text-transform: uppercase; font-weight: bold;}
-.gtco-nav #gtco-logo em {color: #45cdba;;}
+.gtco-nav #gtco-logo em {color: #6668a9;;}
 
 @media screen and (max-width: 767px) {
   .gtco-nav .menu-1, .gtco-nav .menu-2 {display: none;  }
@@ -518,17 +518,15 @@ h1, h2, h3, h4, h5, h6, figure {color:#4d4d4d; font-weight: 400; margin: 0 0 20p
 form label {font-weight: normal !important;}
 
 #gtco-header {
-  background: url('../images/title_img_2.jpg') no-repeat center top;
-  background-color: black;
+  background-color: #6668a9;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
 }
 
-#gtco-header2 {
-  background: url('../images/title_img_3.jpg') no-repeat center top;
-  background-color: black ;  
+#gtco-header2 {  
+  background-color: #6668a9;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
