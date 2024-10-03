@@ -363,6 +363,9 @@ const initQRCode = () => {
 		setQRKindArea(qr_action);
 		hideLoader();
 	}
+	else {
+		hideLoader();
+	}
 
 	$("#form_kind").change(function() {
 		setQRKindArea($("#form_kind option:checked").val());
