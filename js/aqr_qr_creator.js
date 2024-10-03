@@ -362,13 +362,12 @@ const initQRCode = () => {
 	else if (isSet(qr_action)) {
 		$("#form_kind").val(qr_action).prop("selected", true);
 		setQRKindArea(qr_action);
+		hideLoader();
 	}
 
 	$("#form_kind").change(function() {
 		setQRKindArea($("#form_kind option:checked").val());
-	});
-
-	hideLoader();
+	});	
   }
 
   function setQRData(qr_id, data) {
