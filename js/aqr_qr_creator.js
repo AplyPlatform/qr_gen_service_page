@@ -168,10 +168,22 @@ function saveQRdata(kind, genStr) {
 
 	callApi({
 		data : fd,
-		success : function(data) {
-			genQRCode(genStr);
+		success : function(data) {			
+			if (checkIsExistProperty(data, "data") && checkIsExistProperty(data.data, "qr_id")) setSecretCodeBtn(data.data.qr_id);
 
-			if (checkIsExistProperty(data, "data") && checkIsExistProperty(data.data, "qr_id")) setSecretCodeBtn(data.data.qr_id);			
+			$("#form_kind").prop('disabled',true);
+			$("#form_data").prop('disabled',true);
+			$("#form_ssid").prop('disabled',true);
+			$("#form_enc").prop('disabled',true);
+			$("#form_password").prop('disabled',true);
+			$("#warn_area").hide();
+			$("#qr_button_area").hide();
+			$("#new_make_qr_button_area").show();
+
+			$("#newQRButton").click(function() {
+				GA_EVENT("newQRButton_click", "service", "click");
+				location.href = "https://qr.aply.biz";
+			});
 
 			showDialog("QR코드가 생성되었습니다.<br>스마트폰으로 촬영하여 동작을 확인해 보세요!");
 			hideLoader();			
