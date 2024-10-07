@@ -168,7 +168,9 @@ function saveQRdata(kind, genStr) {
 
 	callApi({
 		data : fd,
-		success : function(data) {			
+		success : function(data) {
+			genQRCode(genStr);
+
 			if (checkIsExistProperty(data, "data") && checkIsExistProperty(data.data, "qr_id")) setSecretCodeBtn(data.data.qr_id);
 
 			$("#form_kind").prop('disabled',true);
