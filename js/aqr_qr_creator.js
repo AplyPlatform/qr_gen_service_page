@@ -241,12 +241,23 @@ const initQRCode = () => {
 	  qrCodeBig.update({backgroundOptions : {color : colorInputbg.value}});
 	});
 
+	$("#getQRButton").click(function() {
+		let uniq_code = $("#form_uniq_code").val();
+		if (uniq_code == "" || uniq_code.length > 10) {
+			showDialog("올바른 고유 코드를 입력해 주세요.");
+			return;
+		}
+
+		GA_EVENT("check_uniq_code", "service", uniq_code);
+		location.href = "https://qr.aply.biz/?id=" + uniq_code;
+	});
+
 	$(".qrDownloadButton").click(function () {    
 		let form_image_kind = $(this).attr("id_val");
 		qrCodeBig.download({ name: "QR", extension: form_image_kind });
 
 		$(".qrDownloadButton").hide();
-		showLoader();	
+		showLoader();
 		setTimeout(() => {
 		  $(".qrDownloadButton").show();
 		  hideLoader();
