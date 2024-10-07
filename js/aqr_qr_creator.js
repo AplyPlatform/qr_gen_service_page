@@ -201,7 +201,7 @@ const setQRKindArea = (kindStr) => {
 	if (kindStr == "aqr") {
 		window.open("https://aplx.link/register", "_blank");
 		$("#form_kind").val("url").prop("selected", true);
-		$("#form_input_label").text("인터넷 주소 입력");
+		$("#form_input_label").text("인터넷 주소");
 		return;
 	}
 	else if (kindStr == "wifi") {
@@ -213,7 +213,7 @@ const setQRKindArea = (kindStr) => {
 	else if ($("#form_kind option:checked").val() == "email") $("#form_data").attr("placeHolder", "@");
 	else if ($("#form_kind option:checked").val() == "tel") $("#form_data").attr("placeHolder", "000-000-0000");
 
-	$("#form_input_label").text($("#form_kind option:checked").text() + " 입력");
+	$("#form_input_label").text($("#form_kind option:checked").text());
 }
 
 const initQRCode = () => {
