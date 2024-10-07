@@ -180,6 +180,7 @@ function saveQRdata(kind, genStr) {
 			$("#form_password").prop('disabled',true);
 			$("#warn_area").hide();
 			$("#qr_button_area").hide();
+			$("#checkUniqueCodeArea").hide();
 			$("#new_make_qr_button_area").show();
 
 			$("#newQRButton").click(function() {
