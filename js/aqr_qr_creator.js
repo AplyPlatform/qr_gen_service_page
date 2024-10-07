@@ -249,7 +249,7 @@ const initQRCode = () => {
 		}
 
 		GA_EVENT("check_uniq_code", "service", uniq_code);
-		location.href = "https://qr.aply.biz/?id=" + uniq_code;
+		reqQRIDdata(uniq_code);
 	});
 
 	$(".qrDownloadButton").click(function () {    
