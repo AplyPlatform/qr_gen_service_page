@@ -222,11 +222,21 @@ const setQRKindArea = (kindStr) => {
 	else if (kindStr == "wifi") {
 		$("#normal_input_area").hide();
 		$("#wifi_input_area").show();
+		$("#form_data").prop("type", "text");
 		return;
 	}
-	else if ($("#form_kind option:checked").val() == "url") $("#form_data").attr("placeHolder", "http://");
-	else if ($("#form_kind option:checked").val() == "email") $("#form_data").attr("placeHolder", "@");
-	else if ($("#form_kind option:checked").val() == "tel") $("#form_data").attr("placeHolder", "000-000-0000");
+	else if ($("#form_kind option:checked").val() == "url") {
+		$("#form_data").prop("type", "url");
+		$("#form_data").attr("placeHolder", "http://");
+	}
+	else if ($("#form_kind option:checked").val() == "email") {
+		$("#form_data").prop("type", "email");
+		$("#form_data").attr("placeHolder", "@");
+	}
+	else if ($("#form_kind option:checked").val() == "tel") {
+		$("#form_data").prop("type", "number");
+		$("#form_data").attr("placeHolder", "0000000000");
+	} 
 
 	$("#form_input_label").text($("#form_kind option:checked").text());
 }
