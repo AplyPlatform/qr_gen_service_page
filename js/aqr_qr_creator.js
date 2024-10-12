@@ -235,7 +235,7 @@ const setQRKindArea = (kindStr) => {
 	}
 	else if ($("#form_kind option:checked").val() == "tel") {
 		$("#form_data").prop("type", "number");
-		$("#form_data").attr("placeHolder", "0000000000");
+		$("#form_data").attr("placeHolder", "'-' 없이 번호만 입력해주세요");
 	} 
 
 	$("#form_input_label").text($("#form_kind option:checked").text());
@@ -531,7 +531,7 @@ const initQRCode = () => {
 		return val;
 	}
 	else if ($("#form_kind option:checked").val() == "tel") {				
-		return "tel:" + $("#form_data").val();
+		return "tel:" + $("#form_data").val().replace(/-/g, "");
 	}
   }
 
