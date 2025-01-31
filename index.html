@@ -355,27 +355,26 @@
             <div class="gtco-container">
 				<div class="service-wrap">
 	        		<div class="service">
-						<form role="form" method="post" id="email_up">
 							<div class="row">
 								<div class="col-lg-12 text-center"><h2>문의하기</h2>
 									<div class="form-group" style="background-color: #6668a9;">
 										<div class="form-control" style="height:auto; padding-bottom:.05rem;">
 										<div class="row">                                
 										<div class="col-12 col-md-3 p-b-10">
-											<input type="checkbox" id="min_type_1" name="min_type_1" value="기타">
-											<label class="lab_check" for="min_type_1" style="color:#fff;"><span class="checkbox"></span> &nbsp;서비스 관련</label>
+											<input type="checkbox" id="form_contact_min_type_1" name="form_contact_min_type_1" value="서비스 관련">
+											<label class="lab_check" for="form_contact_min_type_1" style="color:#fff;"><span class="checkbox"></span> &nbsp;서비스 관련</label>
 										</div>								  
 										<div class="col-12 col-md-3 p-b-10">
-											<input type="checkbox" id="min_type_2" name="min_type_2" value="제휴">
-											<label class="lab_check" for="min_type_2" style="color:#fff;"><span class="checkbox"></span> &nbsp;제휴 및 광고</label>
+											<input type="checkbox" id="form_contact_min_type_2" name="form_contact_min_type_2" value="제휴 및 광고">
+											<label class="lab_check" for="form_contact_min_type_2" style="color:#fff;"><span class="checkbox"></span> &nbsp;제휴 및 광고</label>
 										</div>
 										<div class="col-12 col-md-3 p-b-10">
-											<input type="checkbox" id="min_type_3" name="min_type_3" value="SW개발"> 
-											<label class="lab_check" for="min_type_3" style="color:#fff;"><span class="checkbox"></span> &nbsp;SW 개발</label>
+											<input type="checkbox" id="form_contact_min_type_3" name="form_contact_min_type_3" value="SW 개발"> 
+											<label class="lab_check" for="form_contact_min_type_3" style="color:#fff;"><span class="checkbox"></span> &nbsp;SW 개발</label>
 										</div>
 										<div class="col-12 col-md-3 p-b-10">
-											<input type="checkbox" id="min_type_4" name="min_type_4" value="기타문의"> 
-											<label class="lab_check" for="min_type_4" style="color:#fff;"><span class="checkbox"></span> &nbsp;기타</label>
+											<input type="checkbox" id="form_contact_min_type_4" name="form_contact_min_type_4" value="기타"> 
+											<label class="lab_check" for="form_contact_min_type_4" style="color:#fff;"><span class="checkbox"></span> &nbsp;기타</label>
 										</div>
 										</div>
 										<p class="help-block text-danger"></p>
@@ -384,48 +383,47 @@
 								</div>								
 								<div class="col-lg-6">
 									<div class="form-group">
-										<input class="form-control" type="text" name="form_phone" id="form_phone"
+										<input class="form-control" type="text" name="form_contact_email" id="form_contact_email"
 											placeholder="전화번호(-없이 입력해주세요)" required="" pattern="\d+">
 										<p class="help-block text-danger"></p>
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
-										<input class="form-control" type="text" name="form_email" id="form_email"
+										<input class="form-control" type="text" name="form_contact_email" id="form_contact_email"
 											placeholder="이메일 주소" required="">
 										<p class="help-block text-danger"></p>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<textarea class="form-control" name="form_content" id="form_content" rows="7" placeholder="문의 내용" required=""></textarea>
+										<textarea class="form-control" name="form_contact_content" id="form_contact_content" rows="7" placeholder="문의 내용" required=""></textarea>
 										<p class="help-block text-danger"></p>
 									</div>
 								</div>
 
 								<div class="col-md-12 text-center">									
-									<input type="checkbox" name="agree_1" id="agree_1" value="제공">
-									<label class="lab_check" for="agree_1">
-										<span class="checkbox"></span>&nbsp;
-										<a href="javascript:showPrivacyForContactDialog();">개인정보 처리방침</a> 동의 
-										<span class="required">(필수)</span>
-									</label>									
+									<input type="checkbox" name="form_contact_agree_1" id="form_contact_agree_1" value="제공">
+									<label class="lab_check" for="form_contact_agree_1"><span class="checkbox"></span>&nbsp;</label>
+									<a style="cursor:pointer;" id="form_contact_privacy_link">개인정보 처리방침</a> 동의 <span class="required">(필수)</span>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-3"></div>
-								<div class="col-sm-6"><input class="btn btn-lg btn-block" id="email_up_send" type="submit" value="보내기" style="background-color: #6668a9 !important; color:#fff;"></div>
+								<div class="col-sm-6">
+									<button class="btn btn-lg btn-block" id="form_contact_send" type="button" style="background-color: #6668a9 !important; color:#fff;">보내기</button>
+									<div class="spinner-border text-info" role="status" id="form_contact_send_loading" style="display:none;margin-top:15px;">
+										<span class="sr-only">Loading...</span>
+									</div>
+								</div>
 								<div class="col-sm-3"></div>
 							</div>
-							<input type="hidden" name="form_token" id="form_token">
-							<input name="form_kind" id="form_kind" type="hidden" value="recruit">                            
-						</form>
-						<div class="row">					
-							<div class="col-md-12 text-center">
-								<hr class="m-b-30 m-t-30">
-								이 사이트는 Turnstile의 보호를 받으며 Cloudflare <a href='https://www.cloudflare.com/ko-kr/privacypolicy/' style='color:#333;' target='_blank'>개인 정보 보호 정책</a> 및 <a href='https://www.cloudflare.com/ko-kr/website-terms/' style='color:#333;' target='_blank'>서비스 약관</a>이 적용됩니다.
+							<div class="row">
+								<div class="col-md-12 text-center">
+									<hr class="m-b-30 m-t-30">
+									이 사이트는 Turnstile의 보호를 받으며 Cloudflare <a href='https://www.cloudflare.com/ko-kr/privacypolicy/' style='color:#333;' target='_blank'>개인 정보 보호 정책</a> 및 <a href='https://www.cloudflare.com/ko-kr/website-terms/' style='color:#333;' target='_blank'>서비스 약관</a>이 적용됩니다.
+								</div>
 							</div>
-						</div>
 					</div>
 				</div>
             </div>
@@ -490,7 +488,7 @@
 		</div>
 
 		<!-- Logout Modal-->
-		<div class="modal fade" id="askModal" tabindex="-1" role="dialog" aria-labelledby="askModalLabel"
+		<div class="modal fade" id="AAPI_askModal" tabindex="-1" role="dialog" aria-labelledby="askModalLabel"
 			aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -498,24 +496,24 @@
 						<h5 class="modal-title" id="askModalLabel">APLY</h5>
 					</div>
 					<div class="modal-body">
-						<span id="askModalContent"></span>
+						<span id="AAPI_askModalContent"></span>
 					</div>
 					<div class="modal-footer">
-						<button class="btn" type="button" data-dismiss="modal" id="askModalOKButton" style="background-color: #6668a9 !important; color:#fff;">확인</button>
+						<button class="btn" type="button" data-dismiss="modal" id="AAPI_askModalOKButton" style="background-color: #6668a9 !important; color:#fff;">확인</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<!-- Modal 3 -->
-		<div class="modal fade" id="modal-3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="contactPrivacyDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="modal_title_content">(주)어플라이 QR만들기 서비스 개인정보 처리방침</h5>
 						<button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 					</div>
-					<div class="modal-body" id="modal_body_content"></div>
+					<div class="modal-body" id="contact_privacy_body_content"></div>
 					<div class="modal-footer">
 						<button class="btn" type="button" data-dismiss="modal" style="background-color: #6668a9 !important; color:#fff;">닫기</button>
 					</div>
@@ -536,7 +534,7 @@
 	<script src="./js/qr-code-styling.js"></script>
 	<script src="./js/cropper.js"></script>
 	<script src="./js/ol.js"></script>
-  	<script src="./js/aqr_qr_creator.js?v=20241012"></script>
-	<script src="https://home.aply.biz/assets/js/aplyServices.js?v=20230917_01"></script>
+	<script src="https://home.aply.biz/assets/js/aplyServices.js?v=20250131_01"></script>
+  	<script src="./js/aqr_qr_creator.js?v=20250131_01"></script>	
 	</body>
 </html>

@@ -1,7 +1,5 @@
 const API_HANDLER = "https://aplx.link/qr/handler.php"
 
-let isRecaptchaInit = false;
-
 let qrCodeSmall;
 let qrval_small_image_param = {
 	width: 250,
@@ -144,7 +142,7 @@ function checkIsExistProperty(data, field) {
 
 const genQRCode = (qr_code_url) => {
 	if (qr_code_url == "") {
-		showDialog("올바른 정보를 입력해 주세요.");
+		AAPI_showDialog("올바른 정보를 입력해 주세요.");
 		return;
 	}	
 
@@ -184,11 +182,11 @@ function saveQRdata(kind, genStr) {
 			$("#new_make_qr_button_area").show();
 
 			$("#newQRButton").click(function() {
-				GA_EVENT("newQRButton_click", "service", "click");
+				AAPI_GA_EVENT("newQRButton_click", "service", "click");
 				location.href = "https://qr.aply.biz";
 			});
 
-			showDialog("QR코드가 생성되었습니다.<br>스마트폰으로 촬영하여 동작을 확인해 보세요!");
+			AAPI_showDialog("QR코드가 생성되었습니다.<br>스마트폰으로 촬영하여 동작을 확인해 보세요!");
 			hideLoader();			
 			$('html, body').animate({
 				scrollTop: $("#resultArea").offset().top
@@ -196,7 +194,7 @@ function saveQRdata(kind, genStr) {
 			
 		},
 		error : function() {
-			showDialog("QR코드가 생성에 실패하였습니다. 잠시 후 다시 시도해 주세요.");
+			AAPI_showDialog("QR코드가 생성에 실패하였습니다. 잠시 후 다시 시도해 주세요.");
 			hideLoader();			
 		}
 	});
@@ -244,10 +242,6 @@ const setQRKindArea = (kindStr) => {
 const initQRCode = () => {
 	showLoader();
 
-	turnstile.ready(function () {
-		isRecaptchaInit = true;		
-	});	
-
 	qrCodeSmall = new QRCodeStyling(qrval_small_image_param);	
 	qrCodeSmall.append(document.getElementById("qr_sm_image_1"));
 
@@ -269,11 +263,11 @@ const initQRCode = () => {
 	$("#getQRButton").click(function() {
 		let uniq_code = $("#form_uniq_code").val();
 		if (uniq_code == "" || uniq_code.length > 10) {
-			showDialog("올바른 고유 코드를 입력해 주세요.");
+			AAPI_showDialog("올바른 고유 코드를 입력해 주세요.");
 			return;
 		}
 
-		GA_EVENT("check_uniq_code", "service", uniq_code);
+		AAPI_GA_EVENT("check_uniq_code", "service", uniq_code);
 		reqQRIDdata(uniq_code);
 	});
 
@@ -345,7 +339,7 @@ const initQRCode = () => {
 	});
 
 	$("#printButton").click(function() {
-		GA_EVENT("printButton", "service", "service");
+		AAPI_GA_EVENT("printButton", "service", "service");
 		$("#printButton").hide();
 		showLoader();
 		$('#qr_code_image_area').printThis({
@@ -363,7 +357,7 @@ const initQRCode = () => {
 	$("#applyQRButton").click(function() {
 
 		if ($("#agree_privacy").is(":checked") == false) {
-			showDialog("개인정보 처리방침에 동의해주세요.");			
+			AAPI_showDialog("개인정보 처리방침에 동의해주세요.");			
 			return false;
 		}
 
@@ -373,23 +367,23 @@ const initQRCode = () => {
 		if (kind == "wifi") {
 			genStr = generateWIFIData();
 			if (genStr == "") {
-				showDialog("올바른 WiFi 정보를 입력해 주세요.");
+				AAPI_showDialog("올바른 WiFi 정보를 입력해 주세요.");
 				return;
 			}	
 		}
 		else {
 			genStr = generateQRData();
 			if (genStr == "") {
-				showDialog("올바른 " + $("#form_kind option:checked").text() + "을(를) 입력해 주세요.");
+				AAPI_showDialog("올바른 " + $("#form_kind option:checked").text() + "을(를) 입력해 주세요.");
 				return;
 			}
 		}
 		
-		GA_EVENT("genQRClick", "service", genStr);
+		AAPI_GA_EVENT("genQRClick", "service", genStr);
 		saveQRdata(kind, genStr);
 	});
 
-	setSubmitHandler("email_up");
+	AAPI_setContactForm("qrcontact");
 	goToTop();
 
 	const queryString = window.location.search;
@@ -450,7 +444,7 @@ const initQRCode = () => {
 	$("#new_make_qr_button_area").show();
 
 	$("#newQRButton").click(function() {
-		GA_EVENT("newQRButton_click", "service", "click");
+		AAPI_GA_EVENT("newQRButton_click", "service", "click");
 		location.href = "https://qr.aply.biz";
 	});
   }
@@ -460,14 +454,14 @@ const initQRCode = () => {
 
 	let copyDevToken = new ClipboardJS('#secretCodeButton');
     copyDevToken.on('success', function(e) {
-        GA_EVENT("successfully_sec_code_copied", "service", "click");
-        showDialog("고유 코드를 클립보드에 복사하였습니다.");
+        AAPI_GA_EVENT("successfully_sec_code_copied", "service", "click");
+        AAPI_showDialog("고유 코드를 클립보드에 복사하였습니다.");
         e.clearSelection();
     });
 
     copyDevToken.on('error', function(e) {
-        GA_EVENT("failed_sec_code_copy", "service", "click");
-        showDialog("죄송합니다, 일시적인 오류가 발생하였습니다. 다시 시도 부탁드립니다.");
+        AAPI_GA_EVENT("failed_sec_code_copy", "service", "click");
+        AAPI_showDialog("죄송합니다, 일시적인 오류가 발생하였습니다. 다시 시도 부탁드립니다.");
     });
   }
 
@@ -482,18 +476,18 @@ const initQRCode = () => {
 		success : function(data) {
 			if (checkIsExistProperty(data, "data")) {
 				setQRData(qr_id, data.data);
-				showDialog("QR 코드 정보를 성공적으로 불러왔습니다.");
+				AAPI_showDialog("QR 코드 정보를 성공적으로 불러왔습니다.");
 				$("#checkUniqueCodeArea").hide();
 			}
 			else {
-				showDialog("존재하지 않는 고유 코드입니다.");
+				AAPI_showDialog("존재하지 않는 고유 코드입니다.");
 			}
 
 			hideLoader();			
 		},
 		error : function() {
 			hideLoader();
-			showDialog("오류가 발생하였습니다. 잠시 후 다시 사용해 주세요.");
+			AAPI_showDialog("오류가 발생하였습니다. 잠시 후 다시 사용해 주세요.");
 		}
 	});	
   }
@@ -541,113 +535,6 @@ const initQRCode = () => {
 	initQRCode();	
 })(jQuery);
 
-
-function setSubmitHandler(form_p_id) {
-	var form_id = "#" + form_p_id;
-
-	$(form_id + "_send").on("click", function(e) {
-		e.preventDefault();
-
-		if (appSent == true) {
-			if (confirm('이미 전송한 내용이 있습니다. 다시 진행 하시겠습니까?')) {	}
-			else {
-			  return;
-			}
-		}
-
-		showLoader();
-
-		sendApplicationData(form_id);				
-	});
-
-	$('[name^=form_phone]').keypress(validateNumber);
-}
-
-var appSent = false;
-function sendApplicationData(form_id, token)
-{
-	let min_type = "";
-	if ($(form_id).find('input[name="min_type_1"]').is(":checked")) {
-		min_type = "/서비스문의";
-	}
-
-	if ($(form_id).find('input[name="min_type_2"]').is(":checked")) {
-		min_type = min_type + "/제휴및광고";
-	}
-
-	if ($(form_id).find('input[name="min_type_3"]').is(":checked")) {
-		min_type = min_type + "/SW개발";
-	}
-
-	if ($(form_id).find('input[name="min_type_4"]').is(":checked")) {
-		min_type = min_type + "/기타문의";
-	}
-
-	if (min_type == "") {
-		showDialog("문의 종류를 선택해 주세요.");
-		hideLoader();
-		return false;
-	}
-
-	let form_content = $("#form_content").val();
-	if (form_content == "") {
-		showDialog("문의 내용을 입력해 주세요.");
-		hideLoader();
-		return false;
-	}
-
-	let form_phone = $(form_id).find('input[name="form_phone"]').val();
-	if (form_phone == "") {
-		showDialog("전화번호를 입력해 주세요.");
-		hideLoader();
-		return false;
-	}
-
-	let form_email = $(form_id).find('input[name="form_email"]').val();
-	if (form_email == "") {
-		showDialog("이메일을 입력해 주세요.");
-		hideLoader();
-		return false;
-	}
-
-	if ($(form_id).find("#agree_1").length > 0 && $(form_id).find("#agree_1").is(":checked") == false) {
-		showDialog("개인정보 처리방침에 동의해주세요.");
-		hideLoader();
-		return false;
-	}	
-	
-	let ref = $('<input type="hidden" value="' + document.referrer + '" name="ref">');	
-	$(form_id).append(ref);	
-	ref = $('<input type="hidden" value="' + min_type + '" name="min_type">');	
-	$(form_id).append(ref);	
-	ref = $('<input type="hidden" value="qrcontact" name="form_kind">');	
-	$(form_id).append(ref);
-
-	if (isRecaptchaInit == false) {
-		turnstile.ready(function () {
-			isRecaptchaInit = true;
-			turnstile.render('#turnstileWidget', {
-				sitekey: '0x4AAAAAAA62_43H2MO9goDN',
-				callback: function(token) {
-					$(form_id).find('input[name="form_token"]').val(token);
-					let fed = new FormData($(form_id)[0]);
-					ajaxRequestForContact(form_id, fed);
-				},
-			});
-		});
-	}
-	else {
-		turnstile.render('#turnstileWidget', {
-			sitekey: '0x4AAAAAAA62_43H2MO9goDN',
-			callback: function(token) {
-				$(form_id).find('input[name="form_token"]').val(token);
-				let fed = new FormData($(form_id)[0]);
-				ajaxRequestForContact(form_id, fed);
-			},
-		});
-	}	
-}
-
 function callApi(cData) {
 	let jSuccessCallback = cData.success;
     let jErrorCallback = cData.error;
@@ -668,117 +555,14 @@ function callApi(cData) {
         }
     };
 
-	if (isRecaptchaInit == false) {		
-		turnstile.ready(function () {
-			isRecaptchaInit = true;
-			turnstile.render('#turnstileWidget', {
-				sitekey: '0x4AAAAAAA62_43H2MO9goDN',
-				callback: function(token) {
-					cData.data.append("form_token", token);	
-					callData["data"] = cData.data;
-					realCallApi(callData);
-				},
-			});
-		});
-	}
-	else {
-		turnstile.render('#turnstileWidget', {
-			sitekey: '0x4AAAAAAA62_43H2MO9goDN',
-			callback: function(token) {
-				cData.data.append("form_token", token);
-				callData["data"] = cData.data;
-				realCallApi(callData);
-			},
-		});
-	}    	
-}
-
-function realCallApi(data) {
-	$.ajax(data);
-}
-
-function validateNumber(event) {
-    var key = window.event ? event.keyCode : event.which;
-    if (event.keyCode === 8 || event.keyCode === 46) {
-        return true;
-    } else if ( key < 48 || key > 57 ) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function ajaxRequestForContact(form_id, fed) {
-	$.ajax({
-		type: "POST",
-		url: 'https://aply.biz/contact/handler.php',
-		crossDomain: true,
-		dataType: "json",
-		data:fed,
-		enctype: 'multipart/form-data', // 필수
-		processData: false,
-		contentType: false,
-		cache: false,
-		success: function (data) {
-			hideLoader();
-			if (data.result == "success") {
-				$(form_id + " input").last().remove();
-				showDialog("전송이 완료되었습니다. APLY가 연락 드리겠습니다.", function() {
-					location.href="/index.html";
-				});
-				return;
-			}
-			else {				
-				showDialog("오류가 발생하였습니다. 잠시 후 다시 시도해 주세요.");
-				return;
-			}
-		},
-		error: function(jqXHR, text, error){
-			showDialog("죄송합니다, 일시적인 오류가 발생하였습니다. 다시 시도 부탁드립니다.");
-			hideLoader();
-		}
+	AAPI_getCaptchaToken(function(token) {
+		cData.data.append("form_token", token);	
+		callData["data"] = cData.data;
+		$.ajax(callData);
 	});
 }
 
-function GA_EVENT(event_name, category, label = "") {    
-    gtag(
-        'event', event_name, {
-        'event_category': category,
-        'event_label': label        
-    }
-    );
-}
-
-function showDialog(msg, callback = null) {
-	$('#askModalContent').html(msg);
-	$('#askModal').modal('show');
-
-	if (callback == null) return;
-
-	$('#askModalOKButton').off('click');
-	$('#askModalOKButton').click(function () {
-			$('#askModal').modal('hide');
-			callback();
-	});
-}
-
-
-function isSet(value) {
-    if (typeof (value) === 'number')
-        return true;
-    if (value == "" || value == null || value == "undefined" || value == undefined)
-        return false;
-    return true;
-}
-
-function showPrivacyForContactDialog() {	
-	$('#modal_title_content').text("APLY 개인정보처리방침");
-    $('#modal_body_content').load("privacy_for_email.html");
-    $('#modal-3').modal('show');
-}
-
-function showPrivacyDialog() {	
-	$('#modal_title_content').text("APLY 개인정보처리방침");
-    $('#modal_body_content').load("privacy.html");
-    $('#modal-3').modal('show');
+function showPrivacyDialog() {
+	$('#contact_privacy_body_content').load("privacy.html");
+    $('#contactPrivacyDialog').modal({"show" : true});
 }
