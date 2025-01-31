@@ -113,7 +113,7 @@ var utf8_encode = function (s) {
 
 function generateWIFIData() {
 	let ssid = $('#form_ssid').val();
-	if(isSet(ssid) == false || ssid == "") {		
+	if(AAPI_isSet(ssid) == false || ssid == "") {		
 		return "";
 	}	
 
@@ -391,10 +391,10 @@ const initQRCode = () => {
     let qr_action = urlParams.get('kind');
 	let qr_id = urlParams.get('id');
 
-	if (isSet(qr_id)) {
+	if (AAPI_isSet(qr_id)) {
 		reqQRIDdata(qr_id);
 	}
-	else if (isSet(qr_action)) {
+	else if (AAPI_isSet(qr_action)) {
 		$("#form_kind").val(qr_action).prop("selected", true);
 		setQRKindArea(qr_action);
 		hideLoader();
