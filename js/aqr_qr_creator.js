@@ -471,6 +471,7 @@ const initQRCode = () => {
     fd.append("qr_id", qr_id);
 	fd.append("ref", document.referrer);
 
+	showLoader();
 	callApi({
 		data : fd,
 		success : function(data) {
