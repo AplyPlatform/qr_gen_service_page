@@ -9,7 +9,7 @@ let qrval_small_image_param = {
 	data: "",
 	dotsOptions: {
 		color: "#000000",
-		type: "square"
+		type: "extra-rounded"
 	},
 	backgroundOptions: {
 		color: "#ffffff",
@@ -24,10 +24,10 @@ let qrval_small_image_param = {
 		errorCorrectionLevel: "L"   
 	},
 	cornersSquareOptions : {
-		type: "square"
+		type: "extra-rounded"
 	},
 	cornersDotOptions : {
-		type: "square"
+		type: "extra-rounded"
 	}
 };
 
@@ -41,7 +41,7 @@ let qrval_big_image_param = {
 	data: "",
 	dotsOptions: {
 		color: "#000000",
-		type: "square"
+		type: "extra-rounded"
 	},
 	backgroundOptions: {
 		color: "#ffffff",
@@ -56,10 +56,10 @@ let qrval_big_image_param = {
 		errorCorrectionLevel: "L"   
 	},
 	cornersSquareOptions : {
-		type: "square"
+		type: "extra-rounded"
 	},
 	cornersDotOptions : {
-		type: "square"
+		type: "extra-rounded"
 	}
 };
 
@@ -288,16 +288,7 @@ const initQRCode = () => {
 		dotsOptions : {type : this.value},
 		cornersSquareOptions : {type : this.value},
 		cornersDotOptions : {type : this.value}
-	  };    
-	  
-	  let cdoOption = "square";
-	  if (this.value == "dots") cdoOption = "dot";
-	  else cdoOption = this.value;
-	  
-	  param.cornersSquareOptions.type = cdoOption;
-	  
-	  if (this.value == "extra_rounded") cdoOption = "dot";
-	  param.cornersDotOptions.type = cdoOption;
+	  };
   	  
 	  qrCodeSmall.update(param);
 	  qrCodeBig.update(param);
@@ -333,7 +324,7 @@ const initQRCode = () => {
 	  $("#cancelImageButton").hide();
 	  $("#color_fg").val("#000000");
 	  $("#color_bg").val("#ffffff");
-	  $("#form_qr_shape").val("square").prop("selected", true);	  
+	  $("#form_qr_shape").val("extra-rounded").prop("selected", true);
 	  qrCodeSmall.update(qrval_small_image_param);
 	  qrCodeBig.update(qrval_big_image_param);
 	});
