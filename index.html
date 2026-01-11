@@ -22,6 +22,15 @@
 	<meta property="og:url" content="https://qr.aply.biz"/>
 	<meta property="og:site_name" content="QR 코드 만들기 - APLY"/>
 	<meta property="og:description" content="간편하게 QR 코드 만들기 - APLY"/>
+
+	<!-- Favicons-->
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
+    <link rel="shortcut icon" type="image/x-icon" href="images/android-chrome-192x192.png" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="alternate" href="https://qr.aply.biz/" hreflang="x-default">
+    <link rel="canonical" href="https://qr.aply.biz/">
 	
 	<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico"/>	
 	<link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -49,24 +58,6 @@
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="./css/style.css">
 	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
-	<style>
-		@media print {
-		@page { margin: 0; }
-		body { margin: 1.6cm; }
-		}
-
-		.cropper-view-box,
-		.cropper-face {
-		border-radius: 50%;
-		}
-
-		/* The css styles for `outline` do not follow `border-radius` on iOS/Safari (#979). */
-		.cropper-view-box {
-			outline: 0;
-			box-shadow: 0 0 0 1px #39f;
-		}
-	</style>
-	
 	</head>	
 	<body>
 	<div ID="turnstileWidget"></div>
@@ -85,28 +76,22 @@
 		<div class="loader"></div>
 	</div>
 	
-	<div id="page">		
-		<nav class="gtco-nav" role="navigation">
+	<div id="page">
+		<div class="gtco-services gtco-section">
 			<div class="gtco-container">
-				<div class="row">
-					<div class="col-sm-2 col-xs-12">
-						<div id="gtco-logo"><a href="./index.html"><img src="./images/logo_aply.png" alt="APLY QR만들기 서비스" style="height:22px;"></a></div>
-					</div>					
-				</div>
+				
+						<div class="gtco-container" style="padding:2em;">
+							<div class="row">
+								<div class="col-sm-12 text-center" style="color:#fff;">
+									<i><h2 style="padding-top:5; margin:0; color:#FFF;"><b>QR 코드 만들기</b></h2></i>
+									<br>
+									다양한 용도로 QR 코드를 만드세요.
+								</div>
+							</div>
+						</div>
+				
 			</div>
-		</nav>
-
-		<header id="gtco-header2" role="banner">
-			<div class="gtco-container" style="max-width:100%; background: rgba(0, 0, 0, 0.2); padding:2em;">
-				<div class="row">
-					<div class="col-sm-12 text-center" style="color:#fff;">
-						<i><h2 style="padding-top:5; margin:0; color:#FFF;"><b>QR 코드 서비스</b></h2></i>
-						<br>
-						다양한 용도로 QR 코드를 만드세요.
-					</div>
-				</div>
-			</div>
-		</header>
+		</div>
 
 		<div class="gtco-services gtco-section">
 			<div class="gtco-container">
@@ -303,7 +288,7 @@
 									<label for="form_uniq_code" class="control-label">발급받은 고유 코드로 QR 정보를 확인하세요.</label>
 									<input name="form_uniq_code" id="form_uniq_code" class="form-control" value="" placeholder="고유 코드를 입력하세요" style="margin-bottom:8px;">
 									<button class="btn btn-block btn-lg" type="button" id="getQRButton" style="border:1px solid #11897D !important; background-color: #fff !important; color:#11897D !important;">
-										<img src="./images/aqr_square.png" width="24px"> 고유 코드 확인하기
+										QR 고유 코드 확인하기
 									</button>
 								</div>
 							</div>
