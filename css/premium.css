@@ -1,0 +1,74 @@
+
+/* Intro Container */
+#intro-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#intro-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Hide main page during intro */
+body.intro-active #page {
+    display: none;
+}
+
+/* Glassmorphism for cards */
+.card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+}
+
+.card-body {
+    color: #ffffff !important;
+}
+
+label {
+    color: #ffffff !important;
+}
+
+/* Improved buttons */
+.btn {
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#applyQRButton {
+    background: linear-gradient(45deg, #667eea, #764ba2) !important;
+    border: none !important;
+}
+
+/* Premium Header Styling */
+.gtco-services.gtco-section:first-of-type {
+    background: transparent !important;
+    padding-top: 4em !important;
+}
+
+h2 {
+    font-family: 'Abel', sans-serif;
+    letter-spacing: 2px;
+}

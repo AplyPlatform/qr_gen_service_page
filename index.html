@@ -55,10 +55,13 @@
 	<link rel="stylesheet" href="./css/ol.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="./css/style.css">
-	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>	
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
 </head>
 
-<body>
+<body class="intro-active">
+	<div id="intro-container">
+		<canvas id="intro-canvas"></canvas>
+	</div>
 	<div ID="turnstileWidget"></div>
 
 	<div id="fb-root"></div>
@@ -180,7 +183,7 @@
 													<span class="required">(필수)</span>
 												</label>
 												<button type="button" class="btn btn-block btn-lg" id="applyQRButton"
-													style="background-color: #6668a9 !important; color:#fff;"><i
+													style="background-color: #000 !important; color:#fff;"><i
 														class="fa fa-qrcode"></i>&nbsp;&nbsp;QR 코드 만들기</button>
 											</div>
 											<div class="col-sm-3"></div>
@@ -296,7 +299,7 @@
 											<div class="row" id="new_make_qr_button_area" style="display:none;">
 												<div class="col-sm-12">
 													<button type="button" class="btn btn-block btn-lg" id="newQRButton"
-														style="background-color: #6668a9 !important; color:#fff !important;"><i
+														style="background-color: #000 !important; color:#fff !important;"><i
 															class="fa fa-qrcode"></i>&nbsp;&nbsp;새 QR 코드 만들기</button>
 												</div>
 											</div>
@@ -384,8 +387,8 @@
 						<div class="row">
 							<div class="col-lg-12 text-center">
 								<h2>문의하기</h2>
-								<div class="form-group" style="background-color: #6668a9;">
-									<div class="form-control" style="height:auto; padding-bottom:.05rem;">
+								<div class="form-group" style="background-color: #000;">
+									<div class="form-control" style="height:auto;">
 										<div class="row">
 											<div class="col-12 col-md-3 p-b-10">
 												<input type="checkbox" id="form_contact_min_type_1"
@@ -446,15 +449,16 @@
 								<input type="checkbox" name="form_contact_agree_1" id="form_contact_agree_1" value="제공">
 								<label class="lab_check" for="form_contact_agree_1"><span
 										class="checkbox"></span>&nbsp;</label>
-								<a style="cursor:pointer;" id="form_contact_privacy_link">개인정보 처리방침</a> 동의 <span
-									class="required">(필수)</span>
+								<a style="cursor:pointer;" id="form_contact_privacy_link">개인정보
+									처리방침</a> 동의
+								<span class="required">(필수)</span>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-3"></div>
 							<div class="col-sm-6">
 								<button class="btn btn-lg btn-block" id="form_contact_send" type="button"
-									style="background-color: #6668a9 !important; color:#fff;">보내기</button>
+									style="background-color: #000 !important; color:#fff;">보내기</button>
 								<div class="spinner-border text-info" role="status" id="form_contact_send_loading"
 									style="display:none;margin-top:15px;">
 									<span class="sr-only">Loading...</span>
@@ -537,7 +541,7 @@
 					<div class="modal-body" id="errorModalLabel"></div>
 					<div class="modal-footer">
 						<button class="btn" type="button" data-dismiss="modal" id="modal-confirm-btn"
-							style="background-color: #6668a9 !important; color:#fff;">Confirm</button>
+							style="background-color: #000 !important; color:#fff;">Confirm</button>
 					</div>
 				</div>
 			</div>
@@ -556,7 +560,7 @@
 					</div>
 					<div class="modal-footer">
 						<button class="btn" type="button" data-dismiss="modal" id="AAPI_askModalOKButton"
-							style="background-color: #6668a9 !important; color:#fff;">확인</button>
+							style="background-color: #000 !important; color:#fff;">확인</button>
 					</div>
 				</div>
 			</div>
@@ -565,16 +569,17 @@
 		<!-- Modal 3 -->
 		<div class="modal fade" id="contactPrivacyDialog" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="modal_title_content">(주)어플라이 QR만들기 서비스 개인정보 처리방침</h5>
-						<button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+						<button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
+								aria-hidden="true">x</span></button>
 					</div>
 					<div class="modal-body" id="contact_privacy_body_content"></div>
 					<div class="modal-footer">
 						<button class="btn" type="button" data-dismiss="modal"
-							style="background-color: #6668a9 !important; color:#fff;">닫기</button>
+							style="background-color: #000 !important; color:#fff;">닫기</button>
 					</div>
 				</div>
 			</div>
@@ -595,6 +600,7 @@
 	<script src="./js/ol.js"></script>
 	<script src="./js/aplyServices.js?v=20250908_01"></script>
 	<script src="./js/aqr_qr_creator.js?v=20250131_01"></script>
+	<script src="./js/intro.js"></script>
 </body>
 
 </html>
