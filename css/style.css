@@ -249,6 +249,8 @@ a:focus {
   opacity: 0;
 }
 
+/* Bootstrap 3: .in / Bootstrap 4: .show */
+.modal-backdrop.in,
 .modal-backdrop.show {
   opacity: 0.5;
 }
@@ -258,6 +260,8 @@ a:focus {
   transform: translate(0, -50px);
 }
 
+/* Bootstrap 3: .in / Bootstrap 4: .show */
+.modal.in .modal-dialog,
 .modal.show .modal-dialog {
   transform: none;
 }
@@ -355,6 +359,8 @@ a:focus {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
 }
 
+/* Bootstrap 3: 부모에 .open 클래스 / Bootstrap 4: .dropdown-menu에 .show 클래스 */
+.dropdown.open > .dropdown-menu,
 .dropdown-menu.show {
   display: block;
 }
