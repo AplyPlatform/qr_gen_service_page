@@ -8,7 +8,6 @@
 		window.dataLayer = window.dataLayer || [];
 		function gtag() { dataLayer.push(arguments); }
 		gtag('js', new Date());
-
 		gtag('config', 'G-VBKDLBJR2K');
 	</script>
 	<title>QR 코드 만들기 - APLY</title>
@@ -24,7 +23,7 @@
 	<meta property="og:site_name" content="QR 코드 만들기 - APLY" />
 	<meta property="og:description" content="간편하게 QR 코드 만들기 - APLY" />
 
-	<!-- Favicons-->
+	<!-- Favicons -->
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
 	<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
 	<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
@@ -33,505 +32,437 @@
 	<link rel="alternate" href="https://qr.aply.biz/" hreflang="x-default">
 	<link rel="canonical" href="https://qr.aply.biz/">
 
-	<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico" />
+	<!-- Fonts & Icons -->
 	<link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Abel|Raleway|Roboto|Noto+Sans+KR" rel="stylesheet">
-
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="./css/animate.css">
-	<!-- Icomoon Icon Fonts-->
 	<link rel="stylesheet" href="./css/icomoon.css">
-	<!-- Themify Icons-->
 	<link rel="stylesheet" href="./css/themify-icons.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="./css/bootstrap.css">
 
-	<!-- Owl Carousel  -->
-	<link rel="stylesheet" href="./css/owl.carousel.min.css">
-	<link rel="stylesheet" href="./css/owl.theme.default.min.css">
-
+	<!-- Functional CSS (cropper, OpenLayers) -->
 	<link rel="stylesheet" href="./css/cropper.css">
-
 	<link rel="stylesheet" href="./css/ol.css">
-	<!-- Theme style  -->
+
+	<!-- Tailwind CSS -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						teal: { 600: '#11897D', 700: '#0e6f65' },
+					}
+				}
+			}
+		}
+	</script>
+
+	<!-- Custom styles (minimal: modal compat, loader, intro, etc.) -->
 	<link rel="stylesheet" href="./css/style.css">
+
+	<!-- Cloudflare Turnstile -->
 	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
 </head>
 
 <body class="intro-active">
+	<!-- Intro 오버레이 -->
 	<div id="intro-container">
 		<canvas id="intro-canvas"></canvas>
 	</div>
-	<div ID="turnstileWidget"></div>
 
+	<div id="turnstileWidget"></div>
+
+	<!-- Facebook SDK -->
 	<div id="fb-root"></div>
 	<script>(function (d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) return;
-			js = d.createElement(s); js.id = id;
-			js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.5&appId=570867566598427&autoLogAppEvents=1';
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.5&appId=570867566598427&autoLogAppEvents=1';
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 
+	<!-- 로딩 오버레이 -->
 	<div id="loading">
 		<div class="loader"></div>
 	</div>
 
 	<div id="page">
-		<div class="gtco-services gtco-section">
-			<div class="gtco-container">
 
-				<div class="gtco-container" style="padding:2em;">
-					<div class="row">
-						<div class="col-sm-12 text-center" style="color:#fff;">
-							<i>
-								<h2 style="padding-top:5; margin:0; color:#FFF;"><b>QR 코드 만들기</b></h2>
-							</i>
-							<br>
-							다양한 용도로 QR 코드를 만드세요.
+		<!-- 헤더 타이틀 -->
+		<div class="py-10 text-center">
+			<div class="max-w-5xl mx-auto px-4">
+				<h2 class="text-3xl font-bold text-white mb-2"><i>QR 코드 만들기</i></h2>
+				<p class="text-white opacity-80">다양한 용도로 QR 코드를 만드세요.</p>
+			</div>
+		</div>
+
+		<!-- QR 코드 생성 카드 -->
+		<div class="max-w-5xl mx-auto px-4 pb-6">
+			<div class="bg-white rounded-2xl shadow-xl p-6">
+
+				<!-- QR 종류 + 입력 -->
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					<div>
+						<label for="form_kind" class="block text-sm font-medium text-gray-700 mb-1">QR 코드 종류</label>
+						<select name="form_kind" id="form_kind"
+							class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+							<option value="url">인터넷 주소</option>
+							<option value="tel">전화번호</option>
+							<option value="email">이메일</option>
+							<option value="wifi">WiFi</option>
+							<option value="aqr">계좌번호</option>
+						</select>
+					</div>
+					<div id="normal_input_area">
+						<label for="form_data" class="block text-sm font-medium text-gray-700 mb-1"
+							id="form_input_label">인터넷 주소</label>
+						<input type="text" id="form_data" name="form_data"
+							class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+							value="" placeholder="http://">
+					</div>
+				</div>
+
+				<!-- WiFi 입력 영역 -->
+				<div id="wifi_input_area" style="display:none;" class="mt-4">
+					<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+						<div>
+							<label for="form_ssid" class="block text-sm font-medium text-gray-700 mb-1">SSID</label>
+							<div class="flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500">
+								<span class="px-3 text-gray-400 bg-gray-50 border-r border-gray-300 py-2">
+									<i class="fa fa-wifi"></i>
+								</span>
+								<input type="text" id="form_ssid" name="form_ssid"
+									class="flex-1 px-3 py-2 outline-none"
+									placeholder="SSID" required>
+							</div>
+						</div>
+						<div>
+							<label for="form_password" class="block text-sm font-medium text-gray-700 mb-1">패스워드</label>
+							<input type="text" id="form_password" name="form_password"
+								class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+								value="" placeholder="PASSWORD">
+						</div>
+						<div>
+							<label for="form_enc" class="block text-sm font-medium text-gray-700 mb-1">암호화 방법</label>
+							<select name="form_enc" id="form_enc"
+								class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+								<option value="WPA">WPA/WPA2/WPA3</option>
+								<option value="WEP">WEP</option>
+								<option value="nopass">None</option>
+							</select>
+						</div>
+					</div>
+					<div class="mt-3" id="warn_area">
+						<div class="bg-purple-50 border border-purple-200 rounded-lg px-4 py-2 text-sm text-gray-700">
+							<i class="fa fa-exclamation-triangle text-yellow-500 mr-1"></i>
+							SSID, 패스워드의 영문 대소문자를 정확하게 입력하세요.
 						</div>
 					</div>
 				</div>
 
+				<!-- 동의 + 생성 버튼 -->
+				<div class="mt-6 flex flex-col items-center gap-3" id="qr_button_area">
+					<div class="flex items-center gap-2">
+						<input type="checkbox" name="agree_privacy" id="agree_privacy" value="제공"
+							class="w-4 h-4 cursor-pointer accent-black">
+						<label class="text-sm text-gray-600 cursor-pointer" for="agree_privacy">
+							<a href="javascript:showPrivacyDialog();"
+								class="underline text-black hover:text-gray-600">개인정보 처리방침</a> 동의
+							<span class="text-black text-xs">(필수)</span>
+						</label>
+					</div>
+					<button type="button" id="applyQRButton"
+						class="w-full max-w-sm bg-black text-white py-3 px-6 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
+						<i class="fa fa-qrcode mr-2"></i>QR 코드 만들기
+					</button>
+				</div>
+
+				<!-- QR 코드 큰 이미지 (출력용, 숨김) -->
+				<div id="collapseQR" style="display:none;">
+					<div class="flex justify-center mt-4" id="qr_code_image_area">
+						<span style="width:400px;height:400px;" id="qr_big_image_1"></span>
+					</div>
+				</div>
+
+				<!-- 결과 영역 -->
+				<div id="resultArea" style="display:none;">
+					<hr class="my-5 border-gray-200">
+
+					<!-- QR 코드 미리보기 -->
+					<div class="flex justify-center my-4">
+						<span style="width:250px;height:250px;" id="qr_sm_image_1"></span>
+					</div>
+
+					<!-- 커스터마이즈 옵션 -->
+					<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
+						<div>
+							<label class="block text-sm font-medium text-gray-700 mb-1">격자 색상</label>
+							<input type="color" id="color_fg" value="#000000"
+								class="w-full h-10 border border-gray-300 rounded-lg cursor-pointer p-1">
+						</div>
+						<div>
+							<label class="block text-sm font-medium text-gray-700 mb-1">배경 색상</label>
+							<input type="color" id="color_bg" value="#ffffff"
+								class="w-full h-10 border border-gray-300 rounded-lg cursor-pointer p-1">
+						</div>
+						<div>
+							<label class="block text-sm font-medium text-gray-700 mb-1">격자 모양</label>
+							<select id="form_qr_shape"
+								class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+								<option value="dots">동그라미</option>
+								<option value="square">사각형</option>
+								<option value="extra-rounded" selected>약간둥글게</option>
+							</select>
+						</div>
+						<div>
+							<label class="block text-sm font-medium text-gray-700 mb-1">이미지 설정</label>
+							<button type="button" id="cancelImageButton"
+								class="w-full px-3 py-2 border border-green-500 text-green-600 rounded-lg text-sm hover:bg-green-50 transition-colors"
+								style="display:none;">취소</button>
+							<input type="file" id="qr_image_input" name="qr_image_input"
+								class="w-full text-sm text-gray-500 file:mr-2 file:py-1 file:px-3 file:border file:border-gray-300 file:rounded file:text-sm file:bg-white file:cursor-pointer"
+								accept="image/*">
+						</div>
+					</div>
+
+					<!-- 액션 버튼 -->
+					<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-5">
+						<!-- 다운로드 드롭다운 -->
+						<div class="dropdown">
+							<button class="dropdown-toggle w-full bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors font-medium"
+								type="button" id="dropdownMenuButton"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fa fa-download mr-1"></i> 다운로드
+							</button>
+							<div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+								<hr class="my-1 border-gray-100">
+								<a class="qrDownloadButton block py-2 px-4 hover:bg-gray-50 cursor-pointer text-gray-700 text-sm" id_val="png">PNG파일 받기</a>
+								<hr class="my-1 border-gray-100">
+								<a class="qrDownloadButton block py-2 px-4 hover:bg-gray-50 cursor-pointer text-gray-700 text-sm" id_val="jpg">JPG파일 받기</a>
+								<hr class="my-1 border-gray-100">
+								<a class="qrDownloadButton block py-2 px-4 hover:bg-gray-50 cursor-pointer text-gray-700 text-sm" id_val="svg">SVG파일 받기</a>
+								<hr class="my-1 border-gray-100">
+							</div>
+						</div>
+
+						<button class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium"
+							type="button" id="printButton">
+							<i class="fa fa-print mr-1"></i> 출력하기
+						</button>
+
+						<button class="w-full border border-teal-600 bg-white text-teal-700 py-2 px-4 rounded-lg hover:bg-teal-50 transition-colors font-medium"
+							type="button" id="secretCodeButton">
+							<img src="./images/aqr_square.png" width="22" class="inline mr-1 align-middle"> 고유 코드 복사하기
+						</button>
+					</div>
+
+					<hr class="my-5 border-gray-200">
+
+					<!-- 새 QR 코드 만들기 버튼 -->
+					<div id="new_make_qr_button_area" style="display:none;">
+						<button type="button" id="newQRButton"
+							class="w-full bg-black text-white py-3 px-6 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
+							<i class="fa fa-qrcode mr-2"></i>새 QR 코드 만들기
+						</button>
+					</div>
+				</div>
+				<!-- /resultArea -->
+
+			</div>
+		</div>
+		<!-- /QR 생성 카드 -->
+
+		<!-- 고유 코드 확인 섹션 -->
+		<div class="max-w-5xl mx-auto px-4 pb-6" id="checkUniqueCodeArea">
+			<div class="bg-white rounded-2xl shadow-xl p-6">
+				<div class="max-w-md mx-auto">
+					<label for="form_uniq_code" class="block text-sm font-medium text-gray-700 mb-2">
+						발급받은 고유 코드로 QR 정보를 확인하세요.
+					</label>
+					<input name="form_uniq_code" id="form_uniq_code"
+						class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
+						value="" placeholder="고유 코드를 입력하세요">
+					<button class="w-full border-2 border-teal-600 text-teal-700 bg-white py-3 px-6 rounded-xl hover:bg-teal-50 transition-colors font-medium"
+						type="button" id="getQRButton">
+						QR 고유 코드 확인하기
+					</button>
+				</div>
 			</div>
 		</div>
 
-		<div class="gtco-services gtco-section">
-			<div class="gtco-container">
-				<div class="service-wrap">
-					<div class="service">
-						<div class="row">
-							<div class="col-md-12 mb-4">
-								<div class="card h-100 py-2">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-sm-6 text-left">
-												<div class="form-group">
-													<label for="form_kind" class="control-label">QR 코드 종류</label>
-													<select name="form_kind" id="form_kind" class="form-control">
-														<option value="url">인터넷 주소</option>
-														<option value="tel">전화번호</option>
-														<option value="email">이메일</option>
-														<option value="wifi">WiFi</option>
-														<option value="aqr">계좌번호</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-sm-6 text-left" id="normal_input_area">
-												<div class="form-group">
-													<label for="form_date" class="form-label" id="form_input_label">인터넷
-														주소</label>
-													<input type="text" id="form_data" name="form_data"
-														class="form-control" value="" placeholder="http://">
-												</div>
-											</div>
-										</div>
-										<div id="wifi_input_area" style="display:none;">
-											<div class="row">
-												<div class="col-sm-4 text-left">
-													<div class="form-group has-feedback">
-														<label for="form_ssid" class="control-label">SSID</label>
-														<div class="input-group">
-															<span id="basic-addon-ssid" class="input-group-addon"><i
-																	class="fa fa-wifi"></i></span>
-															<input type="text" id="form_ssid" name="form_ssid"
-																class="form-control" placeholder="SSID"
-																aria-describedby="basic-addon-ssid" required>
-														</div>
-														<!-- // <label class="pull-left control-label" for="form_hidden">숨겨져 있음</label>
-														&nbsp;<input type="checkbox" name="form_hidden" id="form_hidden" data-toggle="tooltip" title="SSID가 숨겨져 있음" checked> // -->
-													</div>
-												</div>
-												<div class="col-sm-4 text-left">
-													<div class="form-group">
-														<label for="form_password" class="form-label">패스워드</label>
-														<input type="text" id="form_password" name="form_password"
-															class="form-control" value="" placeholder="PASSWORD">
-													</div>
-												</div>
-												<div class="col-sm-4 text-left">
-													<div class="form-group">
-														<label for="form_enc" class="control-label">암호화 방법</label>
-														<select name="form_enc" id="form_enc" class="form-control">
-															<option value="WPA">WPA/WPA2/WPA3</option>
-															<option value="WEP">WEP</option>
-															<option value="nopass">None</option>
-														</select>
-													</div>
-												</div>
-											</div>
-											<div class="row justify-content-center" id="warn_area">
-												<div class="col-sm-12 text-center">
-													<div
-														style="background-color:#edeafd;padding:5px;border-radius: 5px;">
-														<i class="fa fa-exclamation-triangle"></i> <span
-															style="color:#000;font-size:12px;">SSID, 패스워드의 영문 대소문자를 정확하게
-															입력하세요.</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row" style="margin-top:20px;" id="qr_button_area">
-											<div class="col-sm-3"></div>
-											<div class="col-sm-6">
-												<input type="checkbox" name="agree_privacy" id="agree_privacy"
-													value="제공">
-												<label class="lab_check" for="agree_privacy">
-													<span class="checkbox"></span>&nbsp;
-													<a href="javascript:showPrivacyDialog();">개인정보 처리방침</a> 동의
-													<span class="required">(필수)</span>
-												</label>
-												<button type="button" class="btn btn-block btn-lg" id="applyQRButton"
-													style="background-color: #000 !important; color:#fff;"><i
-														class="fa fa-qrcode"></i>&nbsp;&nbsp;QR 코드 만들기</button>
-											</div>
-											<div class="col-sm-3"></div>
-										</div>
-										<div id="collapseQR" class="panel-collapse collapse">
-											<div class="row" id="qr_code_image_area">
-												<center>
-													<span style="width:400px;height:400px;" id="qr_big_image_1"></span>
-												</center>
-											</div>
-										</div>
-										<div id="resultArea" style="display:none;">
-											<div class="row">
-												<div class="col-sm-12">
-													<hr size="1" color="#eee">
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-sm-12 align-items-center justify-content-center">
-													<center>
-														<br>
-														<span style="width:250px;height:250px;"
-															id="qr_sm_image_1"></span>
-														<br><br>
-													</center>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-sm-3">
-													<label for="size" class="form-label"
-														langid="msg_mgr_qr_dot_color">격자 색상</label>
-													<div class="box">
-														<span class="editor-btn icon" title="Color Picker">
-															<input title="Color Picker" type="color" id="color_fg"
-																value="#000000" class="form-control">
-														</span>
-													</div>
-												</div>
-												<div class="col-sm-3">
-													<label for="size" class="form-label" langid="msg_mgr_qr_bg_color">배경
-														색상</label>
-													<div class="box">
-														<span class="editor-btn icon" title="Color Picker">
-															<input title="Color Picker" type="color" id="color_bg"
-																value="#ffffff" class="form-control">
-														</span>
-													</div>
-												</div>
-												<div class="col-sm-3">
-													<label for="form_qr_shape" class="form-label"
-														langid="msg_mgr_qr_dot_shape">격자 모양</label>
-													<select class="form-control" id="form_qr_shape">
-														<option value="dots">동그라미</option>
-														<option value="square">사각형</option>
-														<option value="extra-rounded" selected>약간둥글게</option>
-													</select>
-												</div>
-												<div class="col-sm-3 text-left">
-													<label for="qr_image_input" class="form-label"
-														langid="msg_mgr_qr_set_image">이미지 설정</label><br>
-													<button type="button" class="btn btn-outline-success btn-block"
-														id="cancelImageButton" style="display:none;"
-														langid="msg_mgr_cancel">취소</button>
-													<input type="file" id="qr_image_input" name="qr_image_input"
-														style="width:100%" accept="image/*">
-												</div>
-											</div>
-											<div class="row" style="margin-top:10px;">
-												<div class="col-sm-4">
-													<div class="dropdown">
-														<button class="btn btn-warning dropdown-toggle btn-block"
-															type="button" id="dropdownMenuButton" data-toggle="dropdown"
-															aria-haspopup="true" aria-expanded="false">
-															<i class="fa fa-download"></i> 다운로드
-														</button>
-														<div class="dropdown-menu text-center"
-															aria-labelledby="dropdownMenuButton">
-															<center>
-																<HR>
-																- <a class="qrDownloadButton" id_val="png"
-																	style="cursor:pointer;font-size:16px;">PNG파일 받기</a>
-																<HR>
-																- <a class="qrDownloadButton" id_val="jpg"
-																	style="cursor:pointer;font-size:16px;">JPG파일 받기</a>
-																<HR>
-																- <a class="qrDownloadButton" id_val="svg"
-																	style="cursor:pointer;font-size:16px;">SVG파일 받기</a>
-																<HR>
-															</center>
-														</div>
-													</div>
-												</div>
-
-												<div class="col-sm-4">
-													<button class="btn btn-success btn-block" type="button"
-														id="printButton">
-														<i class="fa fa-print"></i> 출력하기
-													</button>
-												</div>
-
-												<div class="col-sm-4">
-													<button class="btn btn-block" type="button" id="secretCodeButton"
-														style="border:1px solid #11897D !important; background-color: #fff !important; color:#11897D !important;">
-														<img src="./images/aqr_square.png" width="24px"> 고유 코드 복사하기
-													</button>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-sm-12">
-													<hr size="1" color="#eee">
-												</div>
-											</div>
-											<div class="row" id="new_make_qr_button_area" style="display:none;">
-												<div class="col-sm-12">
-													<button type="button" class="btn btn-block btn-lg" id="newQRButton"
-														style="background-color: #000 !important; color:#fff !important;"><i
-															class="fa fa-qrcode"></i>&nbsp;&nbsp;새 QR 코드 만들기</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+		<!-- AQR 플레이트 홍보 -->
+		<div class="max-w-5xl mx-auto px-4 pb-6">
+			<div class="bg-white rounded-2xl shadow-xl p-6">
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+					<div>
+						<a href="https://smartstore.naver.com/aqr" target="_blank">
+							<img src="./images/aqr_image.png" class="w-full rounded-xl" alt="고급 AQR 플레이트 구매하기">
+						</a>
+						<a href="https://smartstore.naver.com/aqr" target="_blank"
+							class="block mt-3 text-center bg-sky-500 text-white py-2 px-4 rounded-xl hover:bg-sky-600 transition-colors font-medium">
+							고급 AQR 플레이트 구매하기
+						</a>
+					</div>
+					<div class="text-center" style="margin-top: 20%;">
+						<a href="https://aqr.aplx.link" target="_blank">
+							<h4 class="font-bold text-xl" style="color:#158b7e;">
+								계좌번호 노출없이 안전하게.<br><br>
+								<img src="./images/aqr_square.png" class="inline" width="35px">
+								QR 코드로 입금 요청하기
+								<i class="ti-arrow-circle-right"></i>
+							</h4>
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="gtco-services gtco-section" id="checkUniqueCodeArea">
-			<div class="gtco-container">
-				<div class="service-wrap">
-					<div class="service">
-						<div class="row">
-							<div class="col-sm-3"></div>
-							<div class="col-sm-6">
-								<div class="form-group">
-									<label for="form_uniq_code" class="control-label">발급받은 고유 코드로 QR 정보를 확인하세요.</label>
-									<input name="form_uniq_code" id="form_uniq_code" class="form-control" value=""
-										placeholder="고유 코드를 입력하세요" style="margin-bottom:8px;">
-									<button class="btn btn-block btn-lg" type="button" id="getQRButton"
-										style="border:1px solid #11897D !important; background-color: #fff !important; color:#11897D !important;">
-										QR 고유 코드 확인하기
-									</button>
-								</div>
-							</div>
-							<div class="col-sm-3"></div>
-						</div>
+		<!-- AQR-M 홍보 -->
+		<div class="max-w-5xl mx-auto px-4 pb-6">
+			<div class="bg-white rounded-2xl shadow-xl p-6 text-center">
+				<a href="https://m.aq.gy" target="_blank">
+					<h4 class="font-bold text-xl" style="color:#158b7e;">
+						대량의 제품/인프라/설비 관리.<br><br>
+						<img src="./images/logo_aqr_m_circle.png" class="inline" width="35px">
+						AQR-M으로 하세요
+						<i class="ti-arrow-circle-right"></i>
+					</h4>
+				</a>
+			</div>
+		</div>
+
+		<!-- 문의하기 섹션 -->
+		<div class="max-w-5xl mx-auto px-4 pb-6">
+			<div class="bg-white rounded-2xl shadow-xl p-6">
+				<h2 class="text-2xl font-semibold text-gray-800 text-center mb-5">문의하기</h2>
+
+				<!-- 문의 유형 -->
+				<div class="bg-black rounded-xl p-4 mb-4">
+					<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+						<label class="flex items-center gap-2 text-white cursor-pointer text-sm">
+							<input type="checkbox" id="form_contact_min_type_1" name="form_contact_min_type_1"
+								value="서비스 관련" class="w-4 h-4 cursor-pointer accent-white">
+							서비스 관련
+						</label>
+						<label class="flex items-center gap-2 text-white cursor-pointer text-sm">
+							<input type="checkbox" id="form_contact_min_type_2" name="form_contact_min_type_2"
+								value="제휴 및 광고" class="w-4 h-4 cursor-pointer accent-white">
+							제휴 및 광고
+						</label>
+						<label class="flex items-center gap-2 text-white cursor-pointer text-sm">
+							<input type="checkbox" id="form_contact_min_type_3" name="form_contact_min_type_3"
+								value="SW 개발" class="w-4 h-4 cursor-pointer accent-white">
+							SW 개발
+						</label>
+						<label class="flex items-center gap-2 text-white cursor-pointer text-sm">
+							<input type="checkbox" id="form_contact_min_type_4" name="form_contact_min_type_4"
+								value="기타" class="w-4 h-4 cursor-pointer accent-white">
+							기타
+						</label>
 					</div>
+				</div>
+
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+					<div>
+						<input class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+							type="text" name="form_contact_phone" id="form_contact_phone"
+							placeholder="전화번호(-없이 입력해주세요)" pattern="\d+">
+					</div>
+					<div>
+						<input class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+							type="text" name="form_contact_email" id="form_contact_email"
+							placeholder="이메일 주소">
+					</div>
+				</div>
+
+				<div class="mb-4">
+					<textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+						name="form_contact_content" id="form_contact_content"
+						rows="7" placeholder="문의 내용"></textarea>
+				</div>
+
+				<div class="flex items-center justify-center gap-2 mb-4">
+					<input type="checkbox" name="form_contact_agree_1" id="form_contact_agree_1" value="제공"
+						class="w-4 h-4 cursor-pointer accent-black">
+					<label class="text-sm text-gray-600 cursor-pointer" for="form_contact_agree_1">
+						<a class="underline text-black hover:text-gray-600"
+							id="form_contact_privacy_link">개인정보 처리방침</a> 동의
+						<span class="text-black text-xs">(필수)</span>
+					</label>
+				</div>
+
+				<div class="max-w-sm mx-auto">
+					<button class="w-full bg-black text-white py-3 px-6 rounded-xl font-semibold hover:bg-gray-800 transition-colors"
+						id="form_contact_send" type="button">보내기</button>
+					<div class="flex justify-center mt-4" id="form_contact_send_loading" style="display:none;">
+						<div class="loader" style="position:relative;margin:0;"></div>
+					</div>
+				</div>
+
+				<div class="text-center mt-5">
+					<hr class="border-gray-200 mb-4">
+					<p class="text-xs text-gray-500">
+						이 사이트는 Turnstile의 보호를 받으며 Cloudflare
+						<a href='https://www.cloudflare.com/ko-kr/privacypolicy/' class='text-gray-600 hover:underline'
+							target='_blank'>개인 정보 보호 정책</a> 및
+						<a href='https://www.cloudflare.com/ko-kr/website-terms/' class='text-gray-600 hover:underline'
+							target='_blank'>서비스 약관</a>이 적용됩니다.
+					</p>
 				</div>
 			</div>
 		</div>
 
-		<div class="gtco-services gtco-section">
-			<div class="gtco-container">
-				<div class="service-wrap">
-					<div class="service">
-						<div class="row">
-							<div class="col-sm-6">
-								<a href="https://smartstore.naver.com/aqr" target="_blank"><img
-										src="./images/aqr_image.png" border="0" width="100%" alt="고급 AQR 플레이트 구매하기"></a>
-								<a href="https://smartstore.naver.com/aqr" target="_blank" type="button"
-									class="btn btn-info btn-lg btn-block">고급 AQR 플레이트 구매하기</a>
-							</div>
-							<div class="col-sm-6 text-center" style="margin-top: 20%;">
-								<a href="https://aqr.aplx.link" target="_blank">
-									<h4 style="color:#158b7e"><b>계좌번호 노출없이 안전하게.<br /><br /><img
-												src="./images/aqr_square.png" border="0" width="35px"> QR 코드로 입금 요청하기 <i
-												class="ti-arrow-circle-right"></i></b></h4>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		<!-- Facebook like -->
+		<div class="max-w-5xl mx-auto px-4 pb-4">
+			<div class="fb-like" data-href="https://www.facebook.com/APLYPLATFORM"
+				data-layout="standard" data-action="like" data-size="small"
+				data-show-faces="true" data-width="330"></div>
 		</div>
 
-		<div class="gtco-services gtco-section">
-			<div class="gtco-container">
-				<div class="service-wrap">
-					<div class="service">
-						<div class="row">
-							<div class="col-sm-12 text-center" style="margin-top: 20px;">
-								<a href="https://m.aq.gy" target="_blank">
-									<h4 style="color:#158b7e"><b>대량의 제품/인프라/설비 관리.<br /><br /><img
-												src="./images/logo_aqr_m_circle.png" border="0" width="35px"> AQR-M으로
-											하세요 <i class="ti-arrow-circle-right"></i></b></h4>
-								</a>
-							</div>
-						</div>
-					</div>
+		<!-- 푸터 -->
+		<footer id="gtco-footer" class="mt-4 py-8" style="background:#1a1a2e;">
+			<div class="max-w-5xl mx-auto px-4">
+				<div class="mb-6">
+					<h3 class="text-white text-lg font-semibold mb-3">QR 코드 만들기</h3>
+					<select id="selSites"></select>
 				</div>
 			</div>
-		</div>
-		<!-- END .gtco-section -->
-
-		<div class="gtco-services gtco-section">
-			<div class="gtco-container">
-				<div class="service-wrap">
-					<div class="service">
-						<div class="row">
-							<div class="col-lg-12 text-center">
-								<h2>문의하기</h2>
-								<div class="form-group" style="background-color: #000;">
-									<div class="form-control" style="height:auto;">
-										<div class="row">
-											<div class="col-12 col-md-3 p-b-10">
-												<input type="checkbox" id="form_contact_min_type_1"
-													name="form_contact_min_type_1" value="서비스 관련">
-												<label class="lab_check" for="form_contact_min_type_1"
-													style="color:#fff;"><span class="checkbox"></span> &nbsp;서비스
-													관련</label>
-											</div>
-											<div class="col-12 col-md-3 p-b-10">
-												<input type="checkbox" id="form_contact_min_type_2"
-													name="form_contact_min_type_2" value="제휴 및 광고">
-												<label class="lab_check" for="form_contact_min_type_2"
-													style="color:#fff;"><span class="checkbox"></span> &nbsp;제휴 및
-													광고</label>
-											</div>
-											<div class="col-12 col-md-3 p-b-10">
-												<input type="checkbox" id="form_contact_min_type_3"
-													name="form_contact_min_type_3" value="SW 개발">
-												<label class="lab_check" for="form_contact_min_type_3"
-													style="color:#fff;"><span class="checkbox"></span> &nbsp;SW
-													개발</label>
-											</div>
-											<div class="col-12 col-md-3 p-b-10">
-												<input type="checkbox" id="form_contact_min_type_4"
-													name="form_contact_min_type_4" value="기타">
-												<label class="lab_check" for="form_contact_min_type_4"
-													style="color:#fff;"><span class="checkbox"></span> &nbsp;기타</label>
-											</div>
-										</div>
-										<p class="help-block text-danger"></p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="form-group">
-									<input class="form-control" type="text" name="form_contact_phone"
-										id="form_contact_phone" placeholder="전화번호(-없이 입력해주세요)" required=""
-										pattern="\d+">
-									<p class="help-block text-danger"></p>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="form-group">
-									<input class="form-control" type="text" name="form_contact_email"
-										id="form_contact_email" placeholder="이메일 주소" required="">
-									<p class="help-block text-danger"></p>
-								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<textarea class="form-control" name="form_contact_content" id="form_contact_content"
-										rows="7" placeholder="문의 내용" required=""></textarea>
-									<p class="help-block text-danger"></p>
-								</div>
-							</div>
-
-							<div class="col-md-12 text-center">
-								<input type="checkbox" name="form_contact_agree_1" id="form_contact_agree_1" value="제공">
-								<label class="lab_check" for="form_contact_agree_1"><span
-										class="checkbox"></span>&nbsp;</label>
-								<a style="cursor:pointer;" id="form_contact_privacy_link">개인정보
-									처리방침</a> 동의
-								<span class="required">(필수)</span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3"></div>
-							<div class="col-sm-6">
-								<button class="btn btn-lg btn-block" id="form_contact_send" type="button"
-									style="background-color: #000 !important; color:#fff;">보내기</button>
-								<div class="spinner-border text-info" role="status" id="form_contact_send_loading"
-									style="display:none;margin-top:15px;">
-									<span class="sr-only">Loading...</span>
-								</div>
-							</div>
-							<div class="col-sm-3"></div>
-						</div>
-						<div class="row">
-							<div class="col-md-12 text-center">
-								<hr class="m-b-30 m-t-30">
-								이 사이트는 Turnstile의 보호를 받으며 Cloudflare <a
-									href='https://www.cloudflare.com/ko-kr/privacypolicy/' style='color:#333;'
-									target='_blank'>개인 정보 보호 정책</a> 및 <a
-									href='https://www.cloudflare.com/ko-kr/website-terms/' style='color:#333;'
-									target='_blank'>서비스 약관</a>이 적용됩니다.
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="gtco-client">
-			<div class="gtco-container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="fb-like" data-href="https://www.facebook.com/APLYPLATFORM" data-layout="standard"
-							data-action="like" data-size="small" data-show-faces="true" data-width="330"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- END .gtco-client -->
-
-		<footer id="gtco-footer" class="gtco-section" role="contentinfo">
-			<div class="gtco-container">
-				<div class="row row-pb-md">
-					<div class="col-md-4 gtco-widget gtco-footer-paragraph">
-						<h3>QR 코드 만들기</h3>
-						<select id="selSites" class="form-control"></select>
-					</div>
-				</div>
-			</div>
-			<div class="gtco-copyright">
-				<div class="gtco-container">
-					<div class="row">
-						<div class="col-md-6 text-left" style="color:#aaa">
-							<span><img src="images/logo_white.png" style="width:33px;margin-bottom: 2px;"> &copy;
-								<script>document.write((new Date()).getFullYear());</script> <a href="https://aply.biz"
-									style="color:#fff;" target="_blank">APLY Inc.</a>
-							</span>
-						</div>
-						<div class="col-md-6 text-right">
-							<a href="./service.html" onClick="GA_EVENT('util_tos_link_click', 'service', 'service');"
-								target="_blank" style="color:#fff">Terms of Use</a> &nbsp;
-							<small>powered by <a
-									onClick="GA_EVENT('util_aply_homepage_link_click', 'service', 'service');"
-									href="http://aply.biz/" target="_blank" style="color:#fff">APLY Inc.</a></small>
+			<div style="background:#111;" class="py-4 mt-2">
+				<div class="max-w-5xl mx-auto px-4">
+					<div class="flex flex-col sm:flex-row justify-between items-center gap-2 text-sm">
+						<span class="text-gray-400">
+							<img src="images/logo_white.png" class="inline w-8 mb-1 mr-1">
+							&copy; <script>document.write((new Date()).getFullYear());</script>
+							<a href="https://aply.biz" class="text-white hover:text-gray-300" target="_blank">APLY Inc.</a>
+						</span>
+						<div class="text-gray-400">
+							<a href="./service.html"
+								onclick="GA_EVENT('util_tos_link_click', 'service', 'service');"
+								target="_blank" class="text-white hover:text-gray-300">Terms of Use</a>
+							&nbsp;
+							<small>powered by
+								<a onclick="GA_EVENT('util_aply_homepage_link_click', 'service', 'service');"
+									href="http://aply.biz/" target="_blank"
+									class="text-white hover:text-gray-300">APLY Inc.</a>
+							</small>
 						</div>
 					</div>
 				</div>
 			</div>
 		</footer>
 
+		<!-- OpenLayers 팝업 -->
 		<div id="popup" class="ol-popup">
 			<a href="#" id="popup-closer" class="ol-popup-closer"></a>
 			<div id="popup-content"></div>
 		</div>
 
+		<!-- Go to Top -->
 		<div class="gototop js-top">
 			<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 		</div>
 
+		<!-- 알림 모달 -->
 		<div class="modal fade" id="errorModal">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
@@ -540,16 +471,16 @@
 					</div>
 					<div class="modal-body" id="errorModalLabel"></div>
 					<div class="modal-footer">
-						<button class="btn" type="button" data-dismiss="modal" id="modal-confirm-btn"
-							style="background-color: #000 !important; color:#fff;">Confirm</button>
+						<button class="px-5 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
+							type="button" data-dismiss="modal" id="modal-confirm-btn">Confirm</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<!-- Logout Modal-->
-		<div class="modal fade" id="AAPI_askModal" tabindex="-1" role="dialog" aria-labelledby="askModalLabel"
-			aria-hidden="true">
+		<!-- AAPI 확인 모달 -->
+		<div class="modal fade" id="AAPI_askModal" tabindex="-1" role="dialog"
+			aria-labelledby="askModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -559,38 +490,39 @@
 						<span id="AAPI_askModalContent"></span>
 					</div>
 					<div class="modal-footer">
-						<button class="btn" type="button" data-dismiss="modal" id="AAPI_askModalOKButton"
-							style="background-color: #000 !important; color:#fff;">확인</button>
+						<button class="px-5 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
+							type="button" data-dismiss="modal" id="AAPI_askModalOKButton">확인</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<!-- Modal 3 -->
+		<!-- 개인정보 처리방침 모달 -->
 		<div class="modal fade" id="contactPrivacyDialog" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="modal_title_content">(주)어플라이 QR만들기 서비스 개인정보 처리방침</h5>
-						<button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
-								aria-hidden="true">x</span></button>
+						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
 					<div class="modal-body" id="contact_privacy_body_content"></div>
 					<div class="modal-footer">
-						<button class="btn" type="button" data-dismiss="modal"
-							style="background-color: #000 !important; color:#fff;">닫기</button>
+						<button class="px-5 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
+							type="button" data-dismiss="modal">닫기</button>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- jQuery -->
+	</div>
+	<!-- /#page -->
+
+	<!-- Scripts -->
 	<script src="./js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
 	<script src="./js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
 	<script src="./js/bootstrap.min.js"></script>
 	<script src="./js/popper.min.js"></script>
 	<script src="./js/clipboard.min.js"></script>
