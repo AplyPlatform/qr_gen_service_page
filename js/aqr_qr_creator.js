@@ -157,7 +157,8 @@ function saveQRdata(kind, genStr) {
 	let fd = new FormData();
     fd.append("act", "set");
     fd.append("kind", kind);	
-	fd.append("val", $("#form_data").val());
+	// 인터넷 주소는 정규화된 주소(genStr)를 보낸다. 서버가 이 주소로 포워딩한다.
+	fd.append("val", kind == "url" ? genStr : $("#form_data").val());
 	fd.append("ssid", $("#form_ssid").val());
 	fd.append("password", $("#form_password").val());
 	fd.append("hidden", $('#form_hidden').is(':checked') ? "Y" : "N");
@@ -167,6 +168,17 @@ function saveQRdata(kind, genStr) {
 	callApi({
 		data : fd,
 		success : function(data) {
+			if (data == null || data.result != "success") {
+				AAPI_showDialog(checkIsExistProperty(data, "message") ? data.message : "QR코드가 생성에 실패하였습니다. 잠시 후 다시 시도해 주세요.");
+				hideLoader();
+				return;
+			}
+
+			// 인터넷 주소는 https://aq.gy/z/[고유 키워드] 단축 주소를 QR에 담는다.
+			if (kind == "url" && checkIsExistProperty(data.data, "short_url")) {
+				genStr = data.data.short_url;
+				showShortUrl(genStr);
+			}
 			genQRCode(genStr);
 
 			if (checkIsExistProperty(data, "data") && checkIsExistProperty(data.data, "qr_id")) setSecretCodeBtn(data.data.qr_id);
@@ -415,7 +427,16 @@ const initQRCode = () => {
 
 	let qrData = "";
 	switch(data.kind) {
-		case "url":			
+		case "url":
+			$("#form_data").val(data.val);
+			// 단축 주소 도입 전에 만든 QR은 원본 주소를 그대로 담고 있으므로 그대로 다시 만든다.
+			if (checkIsExistProperty(data, "short_url")) {
+				qrData = data.short_url;
+				showShortUrl(qrData);
+			}
+			else qrData = generateQRData();
+			break;
+
 		case "tel":
 		case "email":			
 			$("#form_data").val(data.val);
@@ -449,7 +470,12 @@ const initQRCode = () => {
 	});
   }
 
-  function setSecretCodeBtn(qr_id) {	
+  function showShortUrl(short_url) {
+	$("#shortUrlLink").attr("href", short_url).text(short_url);
+	$("#shortUrlArea").show();
+  }
+
+  function setSecretCodeBtn(qr_id) {
 	$("#secretCodeButton").attr("data-clipboard-text", qr_id);	
 
 	let copyDevToken = new ClipboardJS('#secretCodeButton');
@@ -519,7 +545,10 @@ const initQRCode = () => {
 	}	
 	else if ($("#form_kind option:checked").val() == "url") {
 		if (isValidUrl(val) == false) return "";
-		return val;
+		// 포워딩 대상은 http/https 만 허용 (서버도 같은 검사를 한다)
+		let url = new URL(val);
+		if (url.protocol != "http:" && url.protocol != "https:") return "";
+		return url.href;
 	}
 	else if ($("#form_kind option:checked").val() == "email") {		
 		if (ValidateEmail(val) == false) return "";
