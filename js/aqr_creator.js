@@ -17,7 +17,7 @@ let qrval_small_image_param = {
 	imageOptions: {
 		crossOrigin: "anonymous",        
 		imageSize : 0.4,
-		margin: 0,
+		margin: 6,
 		hideBackgroundDots : true
 	},
 	qrOptions: {
@@ -49,7 +49,7 @@ let qrval_big_image_param = {
 	imageOptions: {
 		crossOrigin: "anonymous",        
 		imageSize : 0.4,
-		margin: 0,
+		margin: 6,
 		hideBackgroundDots : true
 	},
 	qrOptions: {

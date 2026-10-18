@@ -175,10 +175,7 @@ function saveQRdata(kind, genStr) {
 			}
 
 			// 인터넷 주소는 https://aq.gy/z/[고유 키워드] 단축 주소를 QR에 담는다.
-			if (kind == "url" && checkIsExistProperty(data.data, "short_url")) {
-				genStr = data.data.short_url;
-				showShortUrl(genStr);
-			}
+			if (kind == "url" && checkIsExistProperty(data.data, "short_url")) genStr = data.data.short_url;
 			genQRCode(genStr);
 
 			if (checkIsExistProperty(data, "data") && checkIsExistProperty(data.data, "qr_id")) setSecretCodeBtn(data.data.qr_id);
@@ -430,10 +427,7 @@ const initQRCode = () => {
 		case "url":
 			$("#form_data").val(data.val);
 			// 단축 주소 도입 전에 만든 QR은 원본 주소를 그대로 담고 있으므로 그대로 다시 만든다.
-			if (checkIsExistProperty(data, "short_url")) {
-				qrData = data.short_url;
-				showShortUrl(qrData);
-			}
+			if (checkIsExistProperty(data, "short_url")) qrData = data.short_url;
 			else qrData = generateQRData();
 			break;
 
@@ -468,11 +462,6 @@ const initQRCode = () => {
 		AAPI_GA_EVENT("newQRButton_click", "service", "click");
 		location.href = "https://qr.aply.biz";
 	});
-  }
-
-  function showShortUrl(short_url) {
-	$("#shortUrlLink").attr("href", short_url).text(short_url);
-	$("#shortUrlArea").show();
   }
 
   function setSecretCodeBtn(qr_id) {
