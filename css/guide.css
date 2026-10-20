@@ -1,0 +1,138 @@
+/* QR 코드 만들기 가이드 (/guide/) — _tools/build.mjs 가 만든 페이지 전용 */
+:root {
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --text: #1f2330;
+  --muted: #5d6475;
+  --line: #e3e6ee;
+  --brand: #11897d;
+  --brand-dark: #0e6f65;
+  --head-1: #1a1a2e;
+  --head-2: #0f3460;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+a { color: var(--brand-dark); }
+
+.site-head {
+  background: linear-gradient(135deg, var(--head-1) 0%, var(--head-2) 100%);
+  padding: 14px 16px;
+}
+.site-head a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.crumb {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 18px 0 8px;
+}
+.crumb ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.crumb li + li::before { content: "›"; margin-right: 6px; color: #9aa1b2; }
+.crumb a { color: var(--muted); }
+
+article, .card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px 20px;
+  margin-bottom: 20px;
+}
+
+h1 { font-size: 26px; line-height: 1.4; margin: 0 0 14px; }
+h2 { font-size: 20px; line-height: 1.45; margin: 32px 0 10px; }
+h3 { font-size: 17px; margin: 20px 0 6px; }
+
+.answer {
+  font-size: 18px;
+  font-weight: 600;
+  background: #eef8f6;
+  border-left: 4px solid var(--brand);
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin: 0 0 10px;
+}
+
+.meta { font-size: 14px; color: var(--muted); margin: 0 0 6px; }
+
+.table-wrap { overflow-x: auto; margin: 12px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+caption { caption-side: bottom; text-align: left; font-size: 13px; color: var(--muted); padding-top: 6px; }
+th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+th { background: #f0f2f7; white-space: nowrap; }
+
+/* 한글 글꼴은 역슬래시를 ₩ 로 그린다 — 코드·기호는 고정폭 영문 글꼴로 */
+code, pre {
+  font-family: Consolas, "SFMono-Regular", Menlo, "Liberation Mono", monospace;
+}
+p code, li code, td code {
+  background: #eef0f5;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.92em;
+}
+
+pre {
+  background: #1f2330;
+  color: #e9ecf3;
+  border-radius: 8px;
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-size: 14px;
+}
+
+.cta {
+  display: inline-block;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 12px 22px;
+  margin: 24px 0 4px;
+}
+.cta:hover { background: var(--brand-dark); }
+
+.faq h3 { margin-top: 18px; }
+.faq p { margin: 0; }
+
+.sources, .related, .changelog { font-size: 15px; }
+.changelog { color: var(--muted); }
+
+.guide-list { list-style: none; margin: 0; padding: 0; }
+.guide-list li { border-top: 1px solid var(--line); padding: 16px 0; }
+.guide-list li:first-child { border-top: 0; }
+.guide-list h2 { margin: 0 0 6px; font-size: 19px; }
+.guide-list p { margin: 0; }
+
+.site-foot {
+  font-size: 14px;
+  color: var(--muted);
+  padding: 8px 16px 40px;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  article, .card { padding: 32px 36px; }
+  h1 { font-size: 30px; }
+}

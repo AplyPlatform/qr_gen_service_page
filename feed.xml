@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko">
+  <title>QR 코드 만들기 가이드 - APLY QR 코드 만들기</title>
+  <subtitle>와이파이 QR 코드 만드는 법, 인터넷 주소 QR 코드와 주소 길이별 QR 크기 실측, QR 코드 유효기간까지 APLY QR 코드 만들기의 실제 동작을 기준으로 질문별로 정리한 가이드입니다.</subtitle>
+  <link href="https://qr.aply.biz/guide/"/>
+  <link rel="self" href="https://qr.aply.biz/feed.xml"/>
+  <id>https://qr.aply.biz/guide/</id>
+  <updated>2026-10-20T00:00:00+09:00</updated>
+  <author><name>주식회사 어플라이</name><email>contactus@aply.biz</email></author>
+  <entry>
+    <title>QR 코드에 유효기간이 있나요?</title>
+    <link href="https://qr.aply.biz/guide/qr-expiration/"/>
+    <id>https://qr.aply.biz/guide/qr-expiration/</id>
+    <published>2026-10-20T00:00:00+09:00</published>
+    <updated>2026-10-20T00:00:00+09:00</updated>
+    <summary>APLY에서 만든 QR 코드는 유효기간이 없어, 한 번 만들면 기간 제한 없이 계속 쓸 수 있습니다.</summary>
+  </entry>
+  <entry>
+    <title>인터넷 주소(URL) QR 코드 만들기와 주소 길이별 QR 크기</title>
+    <link href="https://qr.aply.biz/guide/url-qr/"/>
+    <id>https://qr.aply.biz/guide/url-qr/</id>
+    <published>2026-10-20T00:00:00+09:00</published>
+    <updated>2026-10-20T00:00:00+09:00</updated>
+    <summary>인터넷 주소를 입력하면 21자 aq.gy 단축 주소가 담긴 QR 코드가 만들어지고, 스캔하면 입력한 주소로 이동합니다.</summary>
+  </entry>
+  <entry>
+    <title>와이파이(WiFi) QR 코드 만드는 법</title>
+    <link href="https://qr.aply.biz/guide/wifi-qr/"/>
+    <id>https://qr.aply.biz/guide/wifi-qr/</id>
+    <published>2026-10-20T00:00:00+09:00</published>
+    <updated>2026-10-20T00:00:00+09:00</updated>
+    <summary>SSID·비밀번호·암호화 방식만 입력하면, 스캔 한 번으로 와이파이에 접속되는 QR 코드를 무료로 만들 수 있습니다.</summary>
+  </entry>
+</feed>

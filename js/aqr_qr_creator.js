@@ -94,7 +94,8 @@ function hideLoader() {
 }
 
 function escape_string(string) {
-	let to_escape = [';', ':'];	
+	// WIFI: 형식(ZXing)에서 \ ; , " : 는 앞에 \ 를 붙여야 한다
+	let to_escape = ['\\', ';', ',', '"', ':'];
 	let output = "";
 	for (var i=0; i<string.length; i++) {
 		if($.inArray(string[i], to_escape) != -1) {
@@ -541,7 +542,7 @@ const initQRCode = () => {
 	}
 	else if ($("#form_kind option:checked").val() == "email") {		
 		if (ValidateEmail(val) == false) return "";
-		return val;
+		return "mailto:" + val;
 	}
 	else if ($("#form_kind option:checked").val() == "tel") {
 		if ($("#form_data").val().indexOf("-") > -1) return "";		

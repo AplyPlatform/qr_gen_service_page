@@ -1,0 +1,43 @@
+# qr.aply.biz — 검색엔진·AI 검색이 인용할 수 있도록 전부 허용한다.
+# AI 크롤러 명단은 바뀐다. 분기마다 각 회사 크롤러 문서를 확인할 것.
+
+User-agent: *
+Allow: /
+
+# 네이버
+User-agent: Yeti
+Allow: /
+
+# AI 검색 색인 · 사용자 질문 시 실시간 열람
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# AI 학습 (막으면 미래 모델이 서비스를 모르게 된다 — 현재 허용)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://qr.aply.biz/sitemap.xml
