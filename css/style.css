@@ -401,3 +401,11 @@ a:focus {
     max-width: calc(100% - 1rem) !important;
   }
 }
+
+/* ============================================================
+   자주 묻는 질문 · 가이드 (질문마다 접기/펼치기)
+   ============================================================ */
+.faq-item > summary::-webkit-details-marker { display: none; }
+.faq-item > summary::marker { content: ""; }
+.faq-item .faq-chevron { flex-shrink: 0; transition: transform 0.2s ease; }
+.faq-item[open] .faq-chevron { transform: rotate(180deg); }

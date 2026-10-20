@@ -258,23 +258,38 @@ function renderHome(raw) {
 
   const ldBlock = [`<script type="application/ld+json">`, ...jsonLd(ld).split("\n"), `</script>`];
 
+  // 질문(가이드 제목)마다 접어 둔다. 펼친 내용도 HTML 에 그대로 있어 크롤러는 읽는다 (FAQPage LD 와 같은 글)
+  const item = (heading, body) => [
+    `\t\t\t<details class="faq-item py-3">`,
+    `\t\t\t\t<summary class="list-none cursor-pointer flex items-center justify-between gap-3">`,
+    `\t\t\t\t\t${heading}`,
+    `\t\t\t\t\t<i class="fa fa-chevron-down text-gray-500 faq-chevron" aria-hidden="true"></i>`,
+    `\t\t\t\t</summary>`,
+    ...body.map((l) => `\t\t\t\t${l}`),
+    `\t\t\t</details>`,
+  ];
+
   const faqBlock = [
     `<div class="max-w-5xl mx-auto px-4 pb-6" id="faq">`,
     `\t<div class="bg-white rounded-2xl shadow-xl p-6">`,
-    `\t\t<h2 class="text-2xl font-semibold text-gray-800 text-center mb-5">자주 묻는 질문</h2>`,
-    `\t\t<div class="space-y-5">`,
-    ...site.faq.flatMap((f) => [
-      `\t\t\t<div>`,
-      `\t\t\t\t<h3 class="font-semibold text-gray-800">${esc(f.q)}</h3>`,
-      `\t\t\t\t<p class="text-gray-600 text-sm mt-1">${esc(f.a)}</p>`,
-      `\t\t\t</div>`,
-    ]),
+    `\t\t<h2 class="text-2xl font-semibold text-gray-800 text-center mb-3">자주 묻는 질문</h2>`,
+    `\t\t<div class="divide-y divide-gray-200">`,
+    ...site.faq.flatMap((f) => item(
+      `<h3 class="font-semibold text-gray-800">${esc(f.q)}</h3>`,
+      [`<p class="text-gray-600 text-sm mt-2">${esc(f.a)}</p>`],
+    )),
     `\t\t</div>`,
-    `\t\t<h2 class="text-xl font-semibold text-gray-800 mt-8 mb-3">${esc(site.hub.title)}</h2>`,
-    `\t\t<ul class="space-y-3">`,
-    ...guides.map((g) => `\t\t\t<li><a class="text-teal-700 underline font-medium" href="/guide/${g.slug}/">${esc(g.title)}</a><span class="block text-gray-600 text-sm">${esc(g.answer)}</span></li>`),
-    `\t\t\t<li><a class="text-teal-700 underline font-medium" href="/guide/">가이드 전체 보기</a></li>`,
-    `\t\t</ul>`,
+    `\t\t<h2 class="text-2xl font-semibold text-gray-800 text-center mt-8 mb-3">${esc(site.hub.title)}</h2>`,
+    `\t\t<div class="divide-y divide-gray-200">`,
+    ...guides.flatMap((g) => item(
+      `<h3 class="font-semibold text-gray-800">${esc(g.title)}</h3>`,
+      [
+        `<p class="text-gray-600 text-sm mt-2">${esc(g.answer)}</p>`,
+        `<a class="inline-block mt-2 text-sm text-teal-700 underline font-medium" href="/guide/${g.slug}/">${esc(g.title)} 자세히 보기 →</a>`,
+      ],
+    )),
+    `\t\t</div>`,
+    `\t\t<p class="text-center mt-5"><a class="text-teal-700 underline font-medium" href="/guide/">가이드 전체 보기</a></p>`,
     `\t</div>`,
     `</div>`,
   ];
