@@ -403,6 +403,33 @@ a:focus {
 }
 
 /* ============================================================
+   상단 CI (gps.aply.biz 와 같은 모양)
+   ============================================================ */
+.site-nav {
+  position: relative;
+  top: 0;
+  width: 100%;
+  padding: 12px 0;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  z-index: 1001;
+}
+
+.gtco-container {
+  max-width: 1140px;
+  position: relative;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* 이 페이지는 Tailwind CDN 기본 리셋(preflight)이 켜져 있고 gps 는 아니다.
+   리셋이 바꾸는 두 가지(box-sizing, img block)를 상단 막대에서만 되돌려 gps 와 같은 크기·위치로 맞춘다. */
+.site-nav .gtco-container { box-sizing: content-box; }
+.site-nav { font-family: 'Roboto', 'Noto Sans KR', Arial, sans-serif; font-size: 16px; line-height: 1.8; }
+.site-nav #gtco-logo img { display: inline; vertical-align: baseline; }
+
+/* ============================================================
    자주 묻는 질문 · 가이드 (질문마다 접기/펼치기)
    ============================================================ */
 .faq-item > summary::-webkit-details-marker { display: none; }
